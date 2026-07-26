@@ -3,7 +3,7 @@
 
 {% block content %}
 <article class="detail">
-  <a class="back-link" href="../{{ kind }}.html">&larr; All {{ "Projects" if kind == "projects" else "Coursework" }}</a>
+  <a class="back-link" href="../{{ kind }}.html">&larr; All {% if kind == "projects" %}Projects{% elif kind == "coursework" %}Coursework{% else %}Experience{% endif %}</a>
   <p class="detail-tag">{{ item.tag }}</p>
   <h1>{{ item.title }}</h1>
   <div class="detail-meta">
@@ -32,7 +32,6 @@
     {% if item.other_links %}
     <ul class="links-list">{% for link in item.other_links %}<li><a href="{{ link.href }}" target="_blank" rel="noopener">{{ link.label }} &rarr;</a></li>{% endfor %}</ul>
     {% endif %}
-    <p class="placeholder-note">Note &mdash; drop PDF/PPTX files into <code>assets/documents/{{ kind }}/{{ item.slug }}/</code> and point the matching href above at that filename (e.g. <code>assets/documents/{{ kind }}/{{ item.slug }}/deck.pptx</code>). Click a PDF card to preview it in place; PPTX cards open/download since browsers can't render PowerPoint natively. Swap any remaining placeholder <code>#</code> hrefs for real repo/demo links.</p>
   </section>
 </article>
 {% endblock %}
