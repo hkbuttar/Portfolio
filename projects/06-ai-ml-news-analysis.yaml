@@ -1,0 +1,30 @@
+slug: ai-ml-news-analysis
+tag: PROJECT 06
+title: Large-Scale AI/ML News Analysis
+org: Independent Project
+dates: '2025'
+team: Solo
+short: |-
+  NLP on ~200,000 AI/ML news articles to identify which industries and companies are most exposed to AI disruption, classify that impact as positive, negative, or mixed, and surface what drives successful vs. failed AI adoption.
+stack:
+- spaCy
+- DistilBERT
+- ChromaDB
+- GPT-4o-mini
+- Plotly
+overview: |-
+  A nine-notebook NLP pipeline over roughly 200,000 AI/ML news articles built to answer three linked questions: which industries and companies are most exposed to AI disruption, whether that exposure reads as positive, negative, or mixed and by what mechanism, and what patterns distinguish successful AI adoption stories from failed ones.
+approach:
+- |-
+  Ran the corpus through a staged pipeline &mdash; EDA, multilingual translation, cleaning, LDA topic modeling (k=30), and spaCy named entity recognition &mdash; to surface the industries and named companies most frequently discussed in AI-disruption coverage.
+- |-
+  Fine-tuned DistilBERT for sentiment on the dair-ai/emotion dataset and applied it at article level to classify AI-impact coverage as positive, negative, or mixed, rather than relying on generic off-the-shelf sentiment scores.
+- |-
+  Built a ChromaDB-backed retrieval-augmented generation layer with GPT-4o-mini for interactive querying of the corpus, and produced async-rendered Plotly visualizations via Playwright for the final analysis.
+- |-
+  Synthesized findings across all nine notebooks into a final presentation deck covering exposure by industry, sentiment mechanism, and adoption-outcome patterns.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/AI_Impact
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/ai-ml-news-analysis/AI_ML_News_Analysis_Presentation.pptx

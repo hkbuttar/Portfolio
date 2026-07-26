@@ -1,0 +1,32 @@
+slug: clothing-fit-prediction
+tag: PROJECT 03
+title: Clothing Fit Prediction & Size Recommendation
+org: Machine Learning I · Final Project
+dates: Winter 2026
+team: with Skylar Liu, Dora Jiayue Li
+short: |-
+  A three-phase pipeline &mdash; unsupervised body-type discovery, seven-model fit classification, and collaborative-filtering size recommendation &mdash; reaching 90.7% accuracy and generalizing across retailers.
+stack:
+- Python
+- scikit-learn
+- SMOTE
+- Collaborative Filtering
+- Clustering
+overview: |-
+  Online apparel retail loses an estimated 30&ndash;40% of revenue to returns, with poor fit as the leading cause. This project builds an end-to-end pipeline across three phases &mdash; unsupervised feature discovery, supervised fit classification, and a collaborative-filtering recommender &mdash; using 192,544 RentTheRunway transactions as the primary dataset, with ModCloth (82,790 transactions) and a clean weight/age/height benchmark dataset (118,871 rows) for cross-retailer validation and baseline comparison.
+approach:
+- |-
+  Ran four clustering methods in parallel on RentTheRunway body measurements and rental context &mdash; K-Means, GMM, DBSCAN, and K-Modes (the last on categorical features numeric methods can't see) &mdash; and applied LDA topic modeling to 176,562 reviews, selecting 11 coherent topics by coherence score. Found that body measurements form a continuous spectrum with no natural cluster boundaries, and that reviews labeled "Small" or "Large" skew toward sizing-discussion topics while "Fit" reviews skew toward positive social-experience language.
+- |-
+  Trained and cross-validated seven classifiers (KNN, Kernel SVM, Linear SVM, Random Forest, Bagging, CART, Naive Bayes) on the rich engineered feature set &mdash; body measurements, cluster-derived features, and LDA topic distributions &mdash; to predict fit outcome (Small / Fit / Large) as a three-class problem.
+- |-
+  KNN on the rich feature set won decisively: 90.7% accuracy, 0.869 macro-F1, a 28% macro-F1 gain over the same model trained on weight/age/height alone (0.677) &mdash; demonstrating that feature richness, not algorithm choice, drove the largest performance gains. Kernel SVM improved similarly (82.0% accuracy); simpler models like Linear SVM and Naive Bayes actually got worse with the expanded feature space.
+- |-
+  Built a collaborative-filtering size recommender on a sparse customer &times; category-size matrix populated with Phase II fit probabilities, with cold-start handling via nearest-neighbor body-measurement matching for new customers. Cross-retailer transfer (train on ModCloth, test on RentTheRunway) reached Hit@1 of 10.5% and Hit@3 of 32.2%, showing that fit patterns generalize across brands at the category level even though within-retailer performance is limited by sparsity.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/Machine-Learning-Final-Project
+- label: Full report (PDF)
+  href: assets/documents/projects/clothing-fit-prediction/FitPrediction_Report_ML.docx.pdf
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/clothing-fit-prediction/ML-Final-Project.pptx

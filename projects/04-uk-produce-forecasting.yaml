@@ -1,0 +1,33 @@
+slug: uk-produce-forecasting
+tag: PROJECT 04
+title: UK Fruit &amp; Vegetable Price Forecasting
+org: Team Project
+dates: Jan 2026 &ndash; Mar 2026
+team: with Danilo Ruberti, Minhao Zhang
+short: |-
+  Weekly price forecasting for UK wholesale vegetables using DEFRA data and an upstream cost index &mdash; S-Mamba and SARIMA split the wins across commodities, evaluated by sMAPE on a 52-week holdout.
+stack:
+- Python
+- R
+- ARIMA
+- SARIMA/ARIMAX
+- VAR/VARMA
+- Holt-Winters
+- DeepAR
+- Mamba
+overview: |-
+  A weekly wholesale price forecasting project for UK vegetables, built on DEFRA's public weekly price series and an upstream agricultural material cost index used as an exogenous cost driver. The dataset spans 2015-01-09 to 2026-02-16 with 9&ndash;13% missingness on selected commodities (holidays and reporting-cycle changes) across 59 commodities, of which 4 were selected for full modeling: Bulb Onions, Cabbage, Carrots, and Lettuce.
+approach:
+- |-
+  Engineered a causal weekly feature panel from raw multi-year price histories &mdash; lag features, rolling statistics, year-over-year deltas, and the exogenous cost-index series &mdash; using forward-fill for missing weeks to avoid data leakage.
+- |-
+  Benchmarked interpretable statistical models (SARIMA, ARIMAX) against deep sequence models (S-Mamba, TimeGPT) on the last 52 weeks of each series, scored by sMAPE for its scale-independence and robustness to the volatility and shock spikes characteristic of produce pricing.
+- |-
+  Selected different winning models per commodity rather than forcing one model across the board: S-Mamba won on Bulb Onions (6.72% sMAPE), Carrots (4.77%), and Lettuce (3.32%), while SARIMA won on Cabbage (4.60%) &mdash; evidence that model choice should be commodity-specific rather than uniform.
+- |-
+  Scoped the result honestly: flagged missing data, retailer/frequency mismatches between the price series and the monthly/quarterly cost indices, and limited commodity coverage as real constraints, and proposed weather and import-volume data as next steps for extending coverage.
+links:
+- label: GitHub repository
+  href: https://github.com/Minhao-Zhang/ADSP_31006_Final_Project
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/uk-produce-forecasting/UK-Vegetable-Price-Prediction.pptx
