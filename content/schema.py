@@ -146,6 +146,12 @@ def load_entries(directory: Path) -> list[Entry]:
     seen_slugs: dict[str, str] = {}
     for path in sorted(directory.glob("*.yaml")):
         raw = yaml.safe_load(path.read_text())
+        if raw is None:
+            raise ContentValidationError(f"{path}: file is empty or contains no YAML content")
+        if not isinstance(raw, dict):
+            raise ContentValidationError(
+                f"{path}: expected a YAML mapping at the top level, got {type(raw).__name__}"
+            )
         entry = Entry.from_dict(raw, source_file=str(path))
         if entry.slug in seen_slugs:
             raise ContentValidationError(

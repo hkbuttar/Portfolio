@@ -3,6 +3,8 @@
   <url><loc>https://example.com/</loc></url>
   <url><loc>https://example.com/projects.html</loc></url>
   <url><loc>https://example.com/coursework.html</loc></url>
+  <url><loc>https://example.com/experience.html</loc></url>
+  <url><loc>https://example.com/education.html</loc></url>
   <url><loc>https://example.com/projects/rakuten-capstone.html</loc></url>
   <url><loc>https://example.com/projects/qlora-recipe-chef.html</loc></url>
   <url><loc>https://example.com/projects/clothing-fit-prediction.html</loc></url>
@@ -15,4 +17,12 @@
   <url><loc>https://example.com/projects/ingredient-match.html</loc></url>
   <url><loc>https://example.com/coursework/advanced-ml-ai.html</loc></url>
   <url><loc>https://example.com/coursework/applied-genai-homework.html</loc></url>
+  <url><loc>https://example.com/experience/teaching-assistant.html</loc></url>
+  <url><loc>https://example.com/experience/charactour.html</loc></url>
+  <url><loc>https://example.com/experience/internet-equity-initiative.html</loc></url>
+  <url><loc>https://example.com/experience/prospanica.html</loc></url>
+  <url><loc>https://example.com/experience/angeles-investors.html</loc></url>
+  <url><loc>https://example.com/experience/hyde-park-art-center.html</loc></url>
+  <url><loc>https://example.com/experience/varsity-tutors.html</loc></url>
+  <url><loc>https://example.com/experience/ultimate-spark-coaching.html</loc></url>
 </urlset>

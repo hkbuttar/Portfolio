@@ -1,0 +1,34 @@
+slug: internet-equity-initiative
+tag: EXPERIENCE 03
+title: Team Member
+org: Internet Equity Initiative
+dates: Jan 2025 &ndash; Jun 2025
+team: Chicago, IL
+short: |-
+  Built an interactive broadband equity dashboard (Python, Plotly Dash, DuckDB) for policy researchers exploring internet access disparities.
+stack:
+- Python
+- Plotly Dash
+- DuckDB
+- Dashboard Development
+- Data Engineering
+- Feature Engineering
+- Backend Query Optimization
+- UI/Filtering Component Design
+- Geospatial Analysis
+- Stakeholder Collaboration
+- Policy Research Translation
+overview: |-
+  Designed and deployed an interactive broadband equity dashboard for UChicago's Internet Equity Initiative, enabling policy researchers to explore internet access disparities across geographies and device generations.
+approach:
+- |-
+  Designed and deployed an interactive broadband equity dashboard (Python, Plotly Dash, DuckDB) enabling dynamic exploration of internet access disparities by geography and device generation.
+- |-
+  Engineered analytical features from DuckDB datasets capturing provider density, infrastructure quality, and speed metrics across regions and time periods.
+- |-
+  Implemented fast, scalable backend queries and custom UI filtering components tailored to stakeholder-specific use cases.
+- |-
+  Partnered directly with policy researchers to translate raw data into actionable insight supporting broadband infrastructure and digital equity decisions.
+links:
+- label: LinkedIn profile
+  href: https://www.linkedin.com/in/hkbuttar

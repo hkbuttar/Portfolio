@@ -5,7 +5,7 @@ org: Independent Project
 dates: '2025'
 team: Solo
 short: |-
-  Topic modeling, NER, and sentiment analysis across 200,000+ AI/ML news articles, culminating in a 25-slide deck.
+  NLP on ~200,000 AI/ML news articles to identify which industries and companies are most exposed to AI disruption, classify that impact as positive, negative, or mixed, and surface what drives successful vs. failed AI adoption.
 stack:
 - spaCy
 - DistilBERT
@@ -13,18 +13,18 @@ stack:
 - GPT-4o-mini
 - Plotly
 overview: |-
-  An eight-notebook analysis pipeline processing over 200,000 AI/ML news articles: EDA, translation, cleaning, topic modeling, named entity recognition, sentiment fine-tuning, and a retrieval-augmented Q&A layer.
+  A nine-notebook NLP pipeline over roughly 200,000 AI/ML news articles built to answer three linked questions: which industries and companies are most exposed to AI disruption, whether that exposure reads as positive, negative, or mixed and by what mechanism, and what patterns distinguish successful AI adoption stories from failed ones.
 approach:
 - |-
-  Ran LDA topic modeling with k=30 topics and spaCy-based named entity recognition across the full corpus.
+  Ran the corpus through a staged pipeline &mdash; EDA, multilingual translation, cleaning, LDA topic modeling (k=30), and spaCy named entity recognition &mdash; to surface the industries and named companies most frequently discussed in AI-disruption coverage.
 - |-
-  Fine-tuned DistilBERT for sentiment on the dair-ai/emotion dataset and applied it to article-level sentiment scoring.
+  Fine-tuned DistilBERT for sentiment on the dair-ai/emotion dataset and applied it at article level to classify AI-impact coverage as positive, negative, or mixed, rather than relying on generic off-the-shelf sentiment scores.
 - |-
-  Built a ChromaDB-backed RAG layer with GPT-4o-mini for interactive querying, and produced async-rendered Plotly visualizations via Playwright.
+  Built a ChromaDB-backed retrieval-augmented generation layer with GPT-4o-mini for interactive querying of the corpus, and produced async-rendered Plotly visualizations via Playwright for the final analysis.
 - |-
-  Synthesized findings into a 25-slide presentation deck.
+  Synthesized findings across all nine notebooks into a final presentation deck covering exposure by industry, sentiment mechanism, and adoption-outcome patterns.
 links:
 - label: GitHub repository
   href: https://github.com/hkbuttar/AI_Impact
 - label: Presentation deck (PPTX)
-  href: assets/documents/projects/ai-ml-news-analysis/presentation-deck.pptx
+  href: assets/documents/projects/ai-ml-news-analysis/AI_ML_News_Analysis_Presentation.pptx

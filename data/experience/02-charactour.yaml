@@ -1,0 +1,40 @@
+slug: charactour
+tag: EXPERIENCE 02
+title: Data Science Project Manager
+org: CharacTour, LLC
+dates: Jun 2025 &ndash; Sep 2025
+team: Chicago, IL
+short: |-
+  Directed a 3-person data science team building NLP pipelines over 10M+ consumer records to power identity-driven AI recommendations.
+stack:
+- NLP
+- Named Entity Recognition
+- Speaker/Video Diarization
+- Team Leadership
+- Project Management
+- Large-Scale Consumer Data Analysis
+- Personality/Trait Modeling
+- AI Dialogue Evaluation
+- Sentiment & Tone Analysis
+- Language-Mapping Frameworks
+- Automated Transcription
+- Recommendation Systems
+- Cross-Functional Coordination
+overview: |-
+  Directed a team of three data science interns at CharacTour, using data from 10M+ consumers to map 23 personality traits to character and entertainment preferences, powering identity-driven AI voice and recommendation systems.
+approach:
+- |-
+  Directed a team of three data science interns analyzing 10M+ consumer records to map 23 personality traits to entertainment preferences, powering identity-driven AI recommendations.
+- |-
+  Built NLP pipelines detecting cluster-specific speech patterns &mdash; sentence structure, emotional cadence &mdash; enabling human-level nuance in AI-generated voices and recommendations.
+- |-
+  Designed an evaluation framework comparing AI-generated dialogue against real character dialogue and TikTok speech patterns to improve naturalness and relatability.
+- |-
+  Created a dynamic language-mapping framework analyzing TikTok scripts to identify the vocabulary, tone, and structure that resonated with distinct audience segments.
+- |-
+  Built a scalable diarization system for long-form video &mdash; automatically slicing, transcribing, and assigning character identity across scenes &mdash; cutting manual tagging effort by 80%.
+- |-
+  Drove improvements to Named Entity Recognition to extract and attribute quotes across complex narrative contexts, keeping character attribution consistent across massive entertainment datasets.
+links:
+- label: LinkedIn profile
+  href: https://www.linkedin.com/in/hkbuttar

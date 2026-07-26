@@ -23,6 +23,7 @@
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
         <li><a href="../projects.html">Projects</a></li>
         <li><a href="../coursework.html">Coursework</a></li>
       </ul>
@@ -46,7 +47,7 @@
   </section>
   <section>
     <h2>Approach</h2>
-    <ul class="approach-list"><li>Built resumable, crash-safe Selenium/BeautifulSoup scrapers pulling product and review data from Sephora (Bazaarvoice API) and Ulta (PowerReviews API), then matched brands and products across retailers via fuzzy string matching into a cross-retailer product graph.</li><li>Ran per-retailer market segmentation with K-Means, Hierarchical Clustering, and Gaussian Mixture Models, and built brand-health pipelines using VADER sentiment and NMF topic modeling to surface delighters, disappointers, and rating-sentiment mismatches.</li><li>Built content-based recommendation engines (substitutes, complements, trade-up/trade-down) per retailer and a unified cross-retailer engine with category-alias matching and two-pass selection guaranteeing cross-platform representation.</li><li>Applied PCA-based dual-retailer perceptual mapping, Granger causality testing for cross-platform sentiment spillover, and Difference-in-Differences with propensity score matching to causally estimate the effect of reputation shocks on review velocity, rating, and sentiment by price tier.</li></ul>
+    <ul class="approach-list"><li>Built resumable, crash-safe Selenium/BeautifulSoup scrapers pulling product and review data from Sephora (Bazaarvoice API) and Ulta (PowerReviews API), then matched brands and products across retailers via fuzzy string matching into a cross-retailer product graph.</li><li>Ran per-retailer market segmentation with K-Means, Hierarchical Clustering, and Gaussian Mixture Models, and built brand-health pipelines using VADER sentiment and NMF topic modeling to surface delighters, disappointers, and rating-sentiment mismatches.</li><li>Built content-based recommendation engines (substitutes, complements, trade-up/trade-down) per retailer and a unified cross-retailer engine with category-alias matching and two-pass selection guaranteeing cross-platform representation.</li><li>Applied PCA-based dual-retailer perceptual mapping, Granger causality testing for cross-platform sentiment spillover, and Difference-in-Differences with propensity score matching to causally estimate the effect of reputation shocks on review velocity, rating, and sentiment by price tier.</li><li>Surfaced concrete, actionable segments rather than abstract clusters &mdash; e.g. Sephora's "Polarizing Problem Children" (lowest ratings, highest variance, elevated helpfulness signaling purchase anxiety) as an intervention queue, and an Ulta segment with 57.3% verified reviewers but only 9.0% verified buyers, flagging visibility built substantially on incentivized reviews. Found that nearly 60% of Sephora's most "disappointed & vocal" products register as neutral-to-positive on Ulta, showing platform signals don't reliably transfer.</li></ul>
   </section>
   <section>
     <h2>Tech Stack</h2>
@@ -54,6 +55,14 @@
   </section>
   <section>
     <h2>Links &amp; Documents</h2>
+    <div class="doc-grid"><a class="doc-card" href="assets/documents/projects/algorithmic-marketing-beauty/Analyzing-Beauty-Retailers.pptx" target="_blank" rel="noopener">
+  <div class="doc-thumb doc-thumb-pptx"><span class="doc-glyph"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<rect x="3" y="4" width="18" height="13" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+<path d="M7 20h10M12 17v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M7 8h6M7 11h10M7 14h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+</svg></span></div>
+  <div class="doc-meta"><span class="doc-label">Presentation deck (PPTX)</span><span class="doc-badge">PPTX</span></div>
+</a></div>
     <ul class="links-list"><li><a href="https://github.com/hkbuttar/Algorithmic_Marketing_Final_Project" target="_blank" rel="noopener">GitHub repository &rarr;</a></li></ul>
     <p class="placeholder-note">Note &mdash; drop PDF/PPTX files into <code>assets/documents/projects/algorithmic-marketing-beauty/</code> and point the matching href above at that filename (e.g. <code>assets/documents/projects/algorithmic-marketing-beauty/deck.pptx</code>). Click a PDF card to preview it in place; PPTX cards open/download since browsers can't render PowerPoint natively. Swap any remaining placeholder <code>#</code> hrefs for real repo/demo links.</p>
   </section>

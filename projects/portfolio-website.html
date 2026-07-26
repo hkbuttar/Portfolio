@@ -23,6 +23,7 @@
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
         <li><a href="../projects.html">Projects</a></li>
         <li><a href="../coursework.html">Coursework</a></li>
       </ul>
@@ -42,19 +43,19 @@
 <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
 </svg>  <section>
     <h2>Overview</h2>
-    <p>The portfolio site you're looking at right now: a static, framework-free multi-page site (Home, Projects, Coursework, and individual detail pages) built entirely from a Python template generator, with a custom hand-drawn design system tying together painting, data, and code.</p>
+    <p>The portfolio site you're looking at right now, rebuilt as a small but real static-site pipeline: content lives as validated YAML data, templated through Jinja2 into static HTML, tested and auto-deployed via GitHub Actions. The visual design &mdash; a hand-drawn brush-stroke motif nodding to an oil-and-charcoal painting practice &mdash; is unchanged from the original version; only the build system underneath it changed.</p>
   </section>
   <section>
     <h2>Approach</h2>
-    <ul class="approach-list"><li>Designed a custom token system &mdash; a warm-paper palette with indigo and ochre accents, Fraunces/Inter/IBM Plex Mono type pairing, and a hand-drawn brush-stroke signature motif nodding to an oil-and-charcoal painting practice.</li><li>Built a Python generator (build.py) that templates all pages &mdash; shared nav, footer, and layout &mdash; from structured project and coursework data, so content changes never require hand-editing HTML.</li><li>Implemented an embedded r&eacute;sum&eacute; viewer, card-grid index pages, and detail pages with linked repos and documents for every project and course.</li><li>Shipped as plain static files with zero build step, deployable via GitHub Pages, Netlify Drop, or Vercel.</li></ul>
+    <ul class="approach-list"><li>Separated content from code: every project and coursework entry is its own YAML file under <code>data/</code>, validated against a schema (<code>content/schema.py</code>) that fails the build with a clear file name and reason on any malformed entry, rather than producing silently broken HTML.</li><li>Replaced hand-written f-string HTML generation with Jinja2 templates using proper inheritance and shared partials (nav, footer, card grid, PDF/PPTX preview cards), so a layout change propagates everywhere from one file.</li><li>Wrote a test suite (schema validity, slug uniqueness, link hygiene, document-folder sync) and a GitHub Actions workflow that runs the tests, builds the site, and deploys to GitHub Pages automatically on every push &mdash; verified the whole pipeline end to end, including deliberately breaking a YAML file to confirm validation actually catches it.</li><li>Built a document-preview system for the Links &amp; Documents section: PDF links render as live first-page thumbnails that open in an in-page lightbox on click; PPTX links get a styled placeholder card, since browsers can't render PowerPoint natively.</li></ul>
   </section>
   <section>
     <h2>Tech Stack</h2>
-    <div class="detail-stack"><span>Python</span><span>HTML</span><span>CSS</span></div>
+    <div class="detail-stack"><span>Python</span><span>Jinja2</span><span>PyYAML</span><span>GitHub Actions</span></div>
   </section>
   <section>
     <h2>Links &amp; Documents</h2>
-    <ul class="links-list"><li><a href="#" target="_blank" rel="noopener">GitHub repository &rarr;</a></li><li><a href="#" target="_blank" rel="noopener">Live site &rarr;</a></li></ul>
+    <ul class="links-list"><li><a href="https://github.com/hkbuttar/Portfolio" target="_blank" rel="noopener">GitHub repository &rarr;</a></li><li><a href="https://hkbuttar.github.io/Portfolio/" target="_blank" rel="noopener">Live site &rarr;</a></li></ul>
     <p class="placeholder-note">Note &mdash; drop PDF/PPTX files into <code>assets/documents/projects/portfolio-website/</code> and point the matching href above at that filename (e.g. <code>assets/documents/projects/portfolio-website/deck.pptx</code>). Click a PDF card to preview it in place; PPTX cards open/download since browsers can't render PowerPoint natively. Swap any remaining placeholder <code>#</code> hrefs for real repo/demo links.</p>
   </section>
 </article>

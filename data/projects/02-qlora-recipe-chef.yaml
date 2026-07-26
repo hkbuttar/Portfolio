@@ -1,11 +1,11 @@
 slug: qlora-recipe-chef
 tag: PROJECT 02
 title: QLoRA Recipe Chef
-org: Independent Project
-dates: Mar 2026 &ndash; Jun 2026
-team: Solo
+org: Machine Learning II · Final Project
+dates: Spring 2026
+team: with Haiyang Hu, Mohan Li, Skylar Liu
 short: |-
-  Qwen2.5-1.5B-Instruct fine-tuned with QLoRA and LoRA on RecipeNLG, served through an interactive Gradio app.
+  Qwen2.5-1.5B-Instruct fine-tuned with QLoRA into a controllable recipe generator &mdash; 77.7% lower perplexity, 4.2GB peak VRAM, with a rank ablation and measured memory comparison against full fine-tuning.
 stack:
 - Python
 - PyTorch
@@ -14,16 +14,20 @@ stack:
 - Gradio
 - Hugging Face
 overview: |-
-  An end-to-end fine-tuning project adapting a small instruction-tuned language model into a recipe-generation assistant, comparing full LoRA against quantized QLoRA training under constrained compute.
+  A QLoRA fine-tune of Qwen2.5-1.5B-Instruct into a controllable recipe generator: given ingredients, a cuisine, and a dietary preference, the model produces a complete, correctly-formatted recipe. The reference model this builds on (Daniel-Krasik/Qwen2.5-1.5B-QLoRA-Recipe) is unconditioned; the team's contribution was adding rule-based cuisine (7 categories) and diet (vegan/vegetarian/omnivore) tags to the RecipeNLG training data and conditioning generation on them.
 approach:
 - |-
-  Fine-tuned Qwen2.5-1.5B-Instruct on the RecipeNLG dataset using both LoRA and QLoRA to compare training efficiency and output quality.
+  Fine-tuned with QLoRA &mdash; a 4-bit NF4-quantized frozen base plus trainable LoRA adapters (rank 16, 1.18% of parameters, 18.5M/1.55B) &mdash; on 20K examples from the RecipeNLG corpus, and measured actual training VRAM rather than citing the textbook number: 4.2GB peak vs. an estimated 30+GB (OOM on a T4) for full fine-tuning.
 - |-
-  Wrapped the fine-tuned model in a Gradio interface for interactive recipe generation from ingredient lists.
+  Evaluated on 5 metrics against base-model and few-shot baselines: perplexity fell 77.7% (12.20 &rarr; 2.72), ROUGE-L rose 58% (0.16 &rarr; 0.26), BERTScore improved roughly 12&times;, ingredient fidelity reached 0.97 vs. 0.83, and general-knowledge retention actually improved (90% &rarr; 95%), ruling out catastrophic forgetting.
 - |-
-  Evaluated generation quality, coherence, and adherence to ingredient constraints across adapter configurations.
+  Ran a LoRA rank ablation (r=16 vs. r=4, all else held constant): r=16 won on held-out eval loss (1.083 vs. 1.110) but r=4 was competitive, showing the method is fairly robust to rank choice in compute-constrained settings.
+- |-
+  Shipped three deployment paths from the ~30MB adapter checkpoint &mdash; local PyTorch loading via PEFT, a Hugging Face Hub push with an auto-generated model card, and a Gradio web app with live base-vs-fine-tuned comparison &mdash; and reported honest limitations: dietary conditioning is weak (vegan outputs still sometimes include dairy) and cuisine tags are rule-based and occasionally noisy.
 links:
 - label: GitHub repository
   href: https://github.com/hkbuttar/QLoRA_Recipe_Chef
 - label: Gradio demo
   href: '#'
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/qlora-recipe-chef/QLoRA_Recipe_Chef.pptx

@@ -23,6 +23,7 @@
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
         <li><a href="../projects.html">Projects</a></li>
         <li><a href="../coursework.html">Coursework</a></li>
       </ul>
@@ -42,11 +43,11 @@
 <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
 </svg>  <section>
     <h2>Overview</h2>
-    <p>An eight-notebook analysis pipeline processing over 200,000 AI/ML news articles: EDA, translation, cleaning, topic modeling, named entity recognition, sentiment fine-tuning, and a retrieval-augmented Q&A layer.</p>
+    <p>A nine-notebook NLP pipeline over roughly 200,000 AI/ML news articles built to answer three linked questions: which industries and companies are most exposed to AI disruption, whether that exposure reads as positive, negative, or mixed and by what mechanism, and what patterns distinguish successful AI adoption stories from failed ones.</p>
   </section>
   <section>
     <h2>Approach</h2>
-    <ul class="approach-list"><li>Ran LDA topic modeling with k=30 topics and spaCy-based named entity recognition across the full corpus.</li><li>Fine-tuned DistilBERT for sentiment on the dair-ai/emotion dataset and applied it to article-level sentiment scoring.</li><li>Built a ChromaDB-backed RAG layer with GPT-4o-mini for interactive querying, and produced async-rendered Plotly visualizations via Playwright.</li><li>Synthesized findings into a 25-slide presentation deck.</li></ul>
+    <ul class="approach-list"><li>Ran the corpus through a staged pipeline &mdash; EDA, multilingual translation, cleaning, LDA topic modeling (k=30), and spaCy named entity recognition &mdash; to surface the industries and named companies most frequently discussed in AI-disruption coverage.</li><li>Fine-tuned DistilBERT for sentiment on the dair-ai/emotion dataset and applied it at article level to classify AI-impact coverage as positive, negative, or mixed, rather than relying on generic off-the-shelf sentiment scores.</li><li>Built a ChromaDB-backed retrieval-augmented generation layer with GPT-4o-mini for interactive querying of the corpus, and produced async-rendered Plotly visualizations via Playwright for the final analysis.</li><li>Synthesized findings across all nine notebooks into a final presentation deck covering exposure by industry, sentiment mechanism, and adoption-outcome patterns.</li></ul>
   </section>
   <section>
     <h2>Tech Stack</h2>
@@ -54,7 +55,7 @@
   </section>
   <section>
     <h2>Links &amp; Documents</h2>
-    <div class="doc-grid"><a class="doc-card" href="assets/documents/projects/ai-ml-news-analysis/presentation-deck.pptx" target="_blank" rel="noopener">
+    <div class="doc-grid"><a class="doc-card" href="assets/documents/projects/ai-ml-news-analysis/AI_ML_News_Analysis_Presentation.pptx" target="_blank" rel="noopener">
   <div class="doc-thumb doc-thumb-pptx"><span class="doc-glyph"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <rect x="3" y="4" width="18" height="13" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
 <path d="M7 20h10M12 17v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>

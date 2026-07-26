@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="index-hero">
+  <h1>Education</h1>
+  {% include "partials/brush.html" %}
+  <p>University of Chicago, undergraduate through graduate.</p>
+</section>
+
+<section class="about" id="ms">
+  <h2>Master of Science, Applied Data Science</h2>
+  {% include "partials/brush.html" %}
+  <p><strong>University of Chicago</strong> &mdash; Sep 2025 &ndash; Aug 2026 (expected) &middot; GPA 3.78</p>
+  <p style="max-width: 70ch; color: var(--ink-soft); margin: 14px 0 22px;">
+    Graduate coursework spanning statistical modeling, time-series forecasting, classical and deep machine learning, applied generative AI and agentic LLM systems, and the leadership and consulting skills to translate technical work for non-technical stakeholders &mdash; applied directly to industry problems through a live retail-marketing course project and a two-quarter capstone with Rakuten Advertising.
+  </p>
+  <h3 style="font-family: var(--display); font-size: 1.05rem; margin: 0 0 10px;">Coursework</h3>
+  <div class="detail-stack" style="margin-bottom: 8px;">
+    <span>Big Data and Cloud Computing (A)</span>
+    <span>Statistical Models for Data Science (A)</span>
+    <span>Leadership &amp; Consulting in Data Science (A)</span>
+    <span>Time Series Analysis and Forecasting (B+)</span>
+    <span>Machine Learning I (A)</span>
+    <span>Data Science for Algorithmic Marketing (A)</span>
+    <span>Machine Learning II (A)</span>
+    <span>Next-Gen NLP: Transformers, LLMs and Agentic AI in Practice (B+)</span>
+    <span>Capstone I (A)</span>
+    <span>MS Career Seminar I&ndash;III (P)</span>
+  </div>
+  <p style="max-width: 70ch; color: var(--mist); font-family: var(--mono); font-size: 0.82rem; margin-top: 14px;">
+    In progress, Summer 2026 (not yet reflected on transcript): Optimization and Simulation, Applied Generative AI, Capstone II.
+  </p>
+</section>
+
+<section class="about" id="bs">
+  <h2>Bachelor of Science, Data Science</h2>
+  {% include "partials/brush.html" %}
+  <p><strong>University of Chicago</strong> &mdash; Sep 2020 &ndash; Jun 2025</p>
+  <p style="max-width: 70ch; color: var(--ink-soft); margin: 14px 0 22px;">
+    Built the foundation everything else on this site sits on: statistics and probability, programming across two languages, the core data science sequence from first principles through applied practicum, and an early machine learning course that pointed toward the direction I'd go on to specialize in. Data Science Clinic I &amp; II were the first place I worked on a real applied project end to end &mdash; the same course I'd later return to as a teaching assistant.
+  </p>
+  <h3 style="font-family: var(--display); font-size: 1.05rem; margin: 0 0 10px;">Relevant coursework</h3>
+  <div class="detail-stack">
+    <span>Introduction to Data Science I &amp; II</span>
+    <span>Introduction to Computer Science I &amp; II</span>
+    <span>Introduction to Machine Learning</span>
+    <span>Advanced Machine Learning &amp; Artificial Intelligence</span>
+    <span>Introduction to Data Engineering</span>
+    <span>Mathematical Methods for Data Science I &amp; II</span>
+    <span>Data Visualization and Communication</span>
+    <span>Models in Data Science</span>
+    <span>Ethics, Fairness, Responsibility, and Privacy in Data Science</span>
+    <span>Data Science Clinic I &amp; II</span>
+    <span>Cognitive Models</span>
+    <span>Introduction to Mathematical Probability</span>
+    <span>Discrete Mathematics</span>
+    <span>Honors Calculus I &amp; II</span>
+  </div>
+</section>
+{% endblock %}

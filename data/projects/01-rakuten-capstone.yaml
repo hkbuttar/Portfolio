@@ -5,7 +5,7 @@ org: Rakuten Advertising · Capstone
 dates: Jan 2026 &ndash; Aug 2026
 team: with Kevin Fan, Aren Mizuno, Kai Schindler
 short: |-
-  A full-stack forecasting dashboard benchmarking twelve time-series models and seven PEFT fine-tuning techniques on NIQ retail data.
+  A capstone with Rakuten Advertising benchmarking time-series foundation models against PEFT fine-tuning for affiliate-revenue forecasting &mdash; zero-shot Chronos won every vertical, cutting forecast error 42%.
 stack:
 - Python
 - FastAPI
@@ -17,16 +17,16 @@ stack:
 - Chronos
 - TimesFM
 overview: |-
-  A capstone project built with Rakuten Advertising comparing classical, machine-learning, and foundation-model approaches to retail demand forecasting, alongside parameter-efficient fine-tuning techniques, across receipt-level NIQ data spanning Luxury Brand Retail, Luxury Department Retail, and Travel verticals.
+  A capstone with Rakuten Advertising replacing manual, client-by-client affiliate revenue forecasting (roughly 400 forecasts/month at 6 hours each, an estimated $2.16M/year in labor) with a standardized, vertical-aware pipeline. The project compares classical statistical models, gradient-boosted trees, time-series foundation models, and parameter-efficient fine-tuning of those foundation models on 1.66M rows of NIQ consumer receipt data spanning Luxury Brand Retail, Luxury Department Retail, and Travel.
 approach:
 - |-
-  Benchmarked SARIMA, SARIMAX, ETS, GARCH, and VAR against LightGBM, XGBoost, and foundation time-series models (Chronos, TimesFM, TTM, MOMENT, Moirai).
+  Benchmarked SARIMA/SARIMAX, VAR, GARCH, and ETS against XGBoost and LightGBM, then against time-series foundation models &mdash; TimesFM, Chronos, Tiny Time Mixers, MOMENT, and Moirai &mdash; scored on nine metrics (WAPE and MdAPE as primary) across 71 total model configurations per vertical.
 - |-
-  Evaluated PEFT fine-tuning techniques &mdash; LoRA, QLoRA, DoRA, BitFit, P-Tuning, Prompt Tuning, and Prefix Tuning &mdash; for adapting foundation models to retail-specific patterns.
+  Fine-tuned the foundation models per vertical with seven PEFT methods (LoRA, QLoRA, DoRA, BitFit, P-Tuning, Prompt Tuning, Prefix Tuning) to test whether vertical-specific adaptation could beat zero-shot forecasting.
 - |-
-  Built a Vite + React PWA dashboard with multi-model comparison charts, confidence bands, residual plots, metric toggles, and CSV/PNG export, backed by a FastAPI service with GZip compression.
+  Found that zero-shot, covariate-aware Chronos won all three verticals outright &mdash; 42% lower WAPE than the strongest traditional baseline &mdash; while fine-tuning underperformed: 83% of 168 fine-tuned runs scored worse than their own base model, and none beat zero-shot Chronos. Reported this honestly as the headline finding rather than the PEFT result the project set out to showcase.
 - |-
-  Authored the methodology and conclusion sections of the capstone paper and produced the metrics slide for the final presentation deck.
+  Built a Vite + React PWA dashboard for non-technical stakeholders with multi-model comparison charts, confidence bands, residual plots, metric toggles, and CSV/PNG export, backed by a FastAPI service with GZip compression, and authored the methodology/conclusion sections and metrics slide for the final capstone deliverables.
 links:
 - label: Live dashboard
   href: '#'
@@ -35,4 +35,4 @@ links:
 - label: Capstone paper (PDF)
   href: assets/documents/projects/rakuten-capstone/capstone-paper.pdf
 - label: Presentation deck (PPTX)
-  href: assets/documents/projects/rakuten-capstone/presentation-deck.pptx
+  href: assets/documents/projects/rakuten-capstone/Rakuten-Presentation.pptx

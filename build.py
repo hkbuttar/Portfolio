@@ -4,8 +4,9 @@ Generates the static multi-page portfolio site.
 
 Architecture
 ------------
-Content lives as data, not code: every project/coursework entry is a YAML
-file under data/projects/ or data/coursework/. This script:
+Content lives as data, not code: every project/coursework/experience entry
+is a YAML file under data/projects/, data/coursework/, or data/experience/.
+This script:
 
   1. Loads and validates every YAML file against the schema in content/schema.py
      (fails loudly, with a file name and reason, on any malformed entry).
@@ -15,9 +16,10 @@ file under data/projects/ or data/coursework/. This script:
      for every entry, removes stale pages for entries that no longer exist,
      and generates a sitemap.xml.
 
-To add a project or course, add a YAML file to data/projects/ or
-data/coursework/ (see scripts/new_entry.py to scaffold one) and rerun this
-script — no template or HTML editing required.
+To add a project, course, or work experience entry, add a YAML file to
+data/projects/, data/coursework/, or data/experience/ (see scripts/new_entry.py
+to scaffold projects/coursework) and rerun this script — no template or HTML
+editing required.
 """
 
 from __future__ import annotations
@@ -80,6 +82,7 @@ def main():
     try:
         projects = load_entries(DATA / "projects")
         coursework = load_entries(DATA / "coursework")
+        experience = load_entries(DATA / "experience")
     except ContentValidationError as e:
         print(f"\n✗ Content validation failed:\n\n{e}\n", file=sys.stderr)
         sys.exit(1)
@@ -107,15 +110,31 @@ def main():
                    "Select an item for the full write-up and linked repository."),
         )
     )
+    (ROOT / "experience.html").write_text(
+        env.get_template("index.html").render(
+            page_title="Experience", active="experience", depth="", kind="experience",
+            items=experience, heading="Experience",
+            intro=("Roles spanning data science leadership, applied analytics, and teaching. "
+                   "Select a role for the full write-up and highlights."),
+        )
+    )
+    (ROOT / "education.html").write_text(
+        env.get_template("education.html").render(page_title="Education", active="education", depth="")
+    )
 
     # --- render detail pages ---------------------------------------------------------
     detail_tpl = env.get_template("detail.html")
-    sitemap_urls = ["", "projects.html", "coursework.html"]
+    sitemap_urls = ["", "projects.html", "coursework.html", "experience.html", "education.html"]
+    active_by_kind = {
+        "projects": "project-detail",
+        "coursework": "course-detail",
+        "experience": "experience-detail",
+    }
 
-    for kind, entries in (("projects", projects), ("coursework", coursework)):
+    for kind, entries in (("projects", projects), ("coursework", coursework), ("experience", experience)):
         out_dir = ROOT / kind
         clean_generated_dir(out_dir)
-        active = "project-detail" if kind == "projects" else "course-detail"
+        active = active_by_kind[kind]
         for item in entries:
             html = detail_tpl.render(
                 page_title=strip_html_entities(item.title),
@@ -141,7 +160,7 @@ def main():
 
     # --- build report ------------------------------------------------------------------
     print("✓ Build complete.")
-    print(f"  {len(projects)} project page(s), {len(coursework)} coursework page(s)")
+    print(f"  {len(projects)} project page(s), {len(coursework)} coursework page(s), {len(experience)} experience page(s)")
     print(f"  {len(sitemap_urls)} URL(s) written to sitemap.xml")
 
 

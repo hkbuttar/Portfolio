@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Large-Scale Sentiment-Rating Mismatch Detection · Harleen Kaur</title>
+<title>Amazon Reviews - Sentiment-Rating Mismatch Detection · Harleen Kaur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -23,6 +23,7 @@
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
         <li><a href="../projects.html">Projects</a></li>
         <li><a href="../coursework.html">Coursework</a></li>
       </ul>
@@ -33,30 +34,34 @@
 <article class="detail">
   <a class="back-link" href="../projects.html">&larr; All Projects</a>
   <p class="detail-tag">PROJECT 05</p>
-  <h1>Large-Scale Sentiment&ndash;Rating Mismatch Detection</h1>
+  <h1>Amazon Reviews &mdash; Sentiment&ndash;Rating Mismatch Detection</h1>
   <div class="detail-meta">
-    <span>Independent Project</span>
+    <span>Big Data and Cloud Computing · Final Project</span>
     <span>Sep 2025 &ndash; Dec 2025</span>
-<span>Solo</span>  </div>
+<span>with Minhae Park, Minhao Zhang, Ali Mardan, Zach Laurence</span>  </div>
 <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
 </svg>  <section>
     <h2>Overview</h2>
-    <p>A distributed data pipeline processing large-scale Amazon review data to surface cases where written sentiment disagreed with the numeric star rating, a signal useful for review-quality and fraud detection.</p>
+    <p>Star ratings alone miss nuanced customer experience: a review can read positively while carrying a low rating, or vice versa, and those mismatches are exactly the signal that surfaces hidden product or service problems. This project builds a two-pipeline system on Amazon's full review dataset (Electronics, Books, Clothing, and Arts & Crafts categories) to detect and explain sentiment&ndash;rating mismatches at scale.</p>
   </section>
   <section>
     <h2>Approach</h2>
-    <ul class="approach-list"><li>Built a distributed PySpark pipeline on GCP Dataproc to process review data at scale, with outputs written to Google Cloud Storage.</li><li>Applied TF-IDF and Word2Vec representations alongside K-Means clustering, LSH, and LDA topic modeling to characterize review content.</li><li>Flagged sentiment&ndash;rating mismatches as a proxy signal for unreliable or manipulated reviews.</li></ul>
+    <ul class="approach-list"><li>Built a PySpark ingestion pipeline moving 115GB of raw review and metadata JSON from Hugging Face into GCS, with a custom schema for inconsistent fields, deduplication, and a windowed 10-year review / 5-year modeling slice, cutting storage to 40GB in Parquet and load time from 60+ minutes to under 5.</li><li>Used weak labeling (star rating as a proxy) with TF-IDF + logistic regression to score review sentiment fast and interpretably at scale, then flagged mismatches &mdash; positive text paired with a low rating, or the reverse &mdash; as the core signal of interest; found that 25&ndash;30% of reviews show this mismatch.</li><li>Layered Word2Vec embeddings, K-Means clustering, and LSH-based approximate nearest-neighbor search to explain *why* a mismatch occurred by surfacing semantically similar reviews, then used LDA topic modeling to extract human-readable themes (shipping, quality, fit, durability) from the mismatched-review population.</li><li>After full 5-class rating prediction underperformed (42.5% accuracy) due to heavy class imbalance and mismatched reviews, pivoted to a binary ALS collaborative-filtering "Like vs. Not Like" formulation &mdash; reported honestly as a deliberate scope change rather than concealing the weaker result &mdash; reaching 93.8% precision and 0.782 F1, prioritizing precision so recommendations stay "safe bets" even at the cost of recall.</li></ul>
   </section>
   <section>
     <h2>Tech Stack</h2>
-    <div class="detail-stack"><span>PySpark</span><span>GCP Dataproc</span><span>GCS</span><span>TF-IDF</span><span>Word2Vec</span><span>LDA</span></div>
+    <div class="detail-stack"><span>PySpark</span><span>GCP Dataproc</span><span>GCS</span><span>TF-IDF</span><span>Word2Vec</span><span>ALS</span></div>
   </section>
   <section>
     <h2>Links &amp; Documents</h2>
-    <div class="doc-grid"><a class="doc-card" href="assets/documents/projects/sentiment-rating-mismatch/pipeline-documentation.pdf" target="_blank" rel="noopener" onclick="return handleDocClick(event, 'assets/documents/projects/sentiment-rating-mismatch/pipeline-documentation.pdf', 'pdf', 'Pipeline documentation (PDF)')">
-  <div class="doc-thumb"><iframe src="assets/documents/projects/sentiment-rating-mismatch/pipeline-documentation.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH" tabindex="-1" aria-hidden="true"></iframe></div>
-  <div class="doc-meta"><span class="doc-label">Pipeline documentation (PDF)</span><span class="doc-badge">PDF</span></div>
+    <div class="doc-grid"><a class="doc-card" href="assets/documents/projects/sentiment-rating-mismatch/Big-Data-Project-Presentation.pptx" target="_blank" rel="noopener">
+  <div class="doc-thumb doc-thumb-pptx"><span class="doc-glyph"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<rect x="3" y="4" width="18" height="13" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+<path d="M7 20h10M12 17v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M7 8h6M7 11h10M7 14h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+</svg></span></div>
+  <div class="doc-meta"><span class="doc-label">Presentation deck (PPTX)</span><span class="doc-badge">PPTX</span></div>
 </a></div>
     <ul class="links-list"><li><a href="#" target="_blank" rel="noopener">GitHub repository &rarr;</a></li></ul>
     <p class="placeholder-note">Note &mdash; drop PDF/PPTX files into <code>assets/documents/projects/sentiment-rating-mismatch/</code> and point the matching href above at that filename (e.g. <code>assets/documents/projects/sentiment-rating-mismatch/deck.pptx</code>). Click a PDF card to preview it in place; PPTX cards open/download since browsers can't render PowerPoint natively. Swap any remaining placeholder <code>#</code> hrefs for real repo/demo links.</p>

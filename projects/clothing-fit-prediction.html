@@ -23,6 +23,7 @@
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
         <li><a href="../projects.html">Projects</a></li>
         <li><a href="../coursework.html">Coursework</a></li>
       </ul>
@@ -35,18 +36,18 @@
   <p class="detail-tag">PROJECT 03</p>
   <h1>Clothing Fit Prediction & Size Recommendation</h1>
   <div class="detail-meta">
-    <span>Independent Project</span>
-    <span>Jan 2026 &ndash; Mar 2026</span>
-<span>Solo</span>  </div>
+    <span>Machine Learning I · Final Project</span>
+    <span>Winter 2026</span>
+<span>with Skylar Liu, Dora Jiayue Li</span>  </div>
 <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
 </svg>  <section>
     <h2>Overview</h2>
-    <p>A recommender system tackling the online apparel fit problem: predicting whether a garment will run small, true-to-size, or large, and recommending sizes using collaborative filtering.</p>
+    <p>Online apparel retail loses an estimated 30&ndash;40% of revenue to returns, with poor fit as the leading cause. This project builds an end-to-end pipeline across three phases &mdash; unsupervised feature discovery, supervised fit classification, and a collaborative-filtering recommender &mdash; using 192,544 RentTheRunway transactions as the primary dataset, with ModCloth (82,790 transactions) and a clean weight/age/height benchmark dataset (118,871 rows) for cross-retailer validation and baseline comparison.</p>
   </section>
   <section>
     <h2>Approach</h2>
-    <ul class="approach-list"><li>Built customer and garment clustering to segment fit behavior across the combined RentTheRunway and ModCloth transaction data.</li><li>Trained and compared seven classifiers for fit prediction, applying SMOTE to correct for severe class imbalance in fit outcomes.</li><li>Layered a collaborative-filtering recommender on top of the fit classifier to generate personalized size suggestions.</li></ul>
+    <ul class="approach-list"><li>Ran four clustering methods in parallel on RentTheRunway body measurements and rental context &mdash; K-Means, GMM, DBSCAN, and K-Modes (the last on categorical features numeric methods can't see) &mdash; and applied LDA topic modeling to 176,562 reviews, selecting 11 coherent topics by coherence score. Found that body measurements form a continuous spectrum with no natural cluster boundaries, and that reviews labeled "Small" or "Large" skew toward sizing-discussion topics while "Fit" reviews skew toward positive social-experience language.</li><li>Trained and cross-validated seven classifiers (KNN, Kernel SVM, Linear SVM, Random Forest, Bagging, CART, Naive Bayes) on the rich engineered feature set &mdash; body measurements, cluster-derived features, and LDA topic distributions &mdash; to predict fit outcome (Small / Fit / Large) as a three-class problem.</li><li>KNN on the rich feature set won decisively: 90.7% accuracy, 0.869 macro-F1, a 28% macro-F1 gain over the same model trained on weight/age/height alone (0.677) &mdash; demonstrating that feature richness, not algorithm choice, drove the largest performance gains. Kernel SVM improved similarly (82.0% accuracy); simpler models like Linear SVM and Naive Bayes actually got worse with the expanded feature space.</li><li>Built a collaborative-filtering size recommender on a sparse customer &times; category-size matrix populated with Phase II fit probabilities, with cold-start handling via nearest-neighbor body-measurement matching for new customers. Cross-retailer transfer (train on ModCloth, test on RentTheRunway) reached Hit@1 of 10.5% and Hit@3 of 32.2%, showing that fit patterns generalize across brands at the category level even though within-retailer performance is limited by sparsity.</li></ul>
   </section>
   <section>
     <h2>Tech Stack</h2>
@@ -54,6 +55,17 @@
   </section>
   <section>
     <h2>Links &amp; Documents</h2>
+    <div class="doc-grid"><a class="doc-card" href="assets/documents/projects/clothing-fit-prediction/FitPrediction_Report_ML.docx.pdf" target="_blank" rel="noopener" onclick="return handleDocClick(event, 'assets/documents/projects/clothing-fit-prediction/FitPrediction_Report_ML.docx.pdf', 'pdf', 'Full report (PDF)')">
+  <div class="doc-thumb"><iframe src="assets/documents/projects/clothing-fit-prediction/FitPrediction_Report_ML.docx.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH" tabindex="-1" aria-hidden="true"></iframe></div>
+  <div class="doc-meta"><span class="doc-label">Full report (PDF)</span><span class="doc-badge">PDF</span></div>
+</a><a class="doc-card" href="assets/documents/projects/clothing-fit-prediction/ML-Final-Project.pptx" target="_blank" rel="noopener">
+  <div class="doc-thumb doc-thumb-pptx"><span class="doc-glyph"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<rect x="3" y="4" width="18" height="13" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+<path d="M7 20h10M12 17v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M7 8h6M7 11h10M7 14h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+</svg></span></div>
+  <div class="doc-meta"><span class="doc-label">Presentation deck (PPTX)</span><span class="doc-badge">PPTX</span></div>
+</a></div>
     <ul class="links-list"><li><a href="https://github.com/hkbuttar/Machine-Learning-Final-Project" target="_blank" rel="noopener">GitHub repository &rarr;</a></li></ul>
     <p class="placeholder-note">Note &mdash; drop PDF/PPTX files into <code>assets/documents/projects/clothing-fit-prediction/</code> and point the matching href above at that filename (e.g. <code>assets/documents/projects/clothing-fit-prediction/deck.pptx</code>). Click a PDF card to preview it in place; PPTX cards open/download since browsers can't render PowerPoint natively. Swap any remaining placeholder <code>#</code> hrefs for real repo/demo links.</p>
   </section>

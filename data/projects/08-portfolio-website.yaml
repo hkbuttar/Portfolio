@@ -5,24 +5,25 @@ org: Independent Project
 dates: '2026'
 team: Solo
 short: |-
-  This site &mdash; a static, dependency-free multi-page portfolio with a custom design system and a Python page generator.
+  This site &mdash; a YAML-driven static site generator with Jinja2 templates, schema validation, a test suite, and GitHub Actions CI/CD, all producing a hand-designed portfolio with zero client-side framework.
 stack:
 - Python
-- HTML
-- CSS
+- Jinja2
+- PyYAML
+- GitHub Actions
 overview: |-
-  The portfolio site you're looking at right now: a static, framework-free multi-page site (Home, Projects, Coursework, and individual detail pages) built entirely from a Python template generator, with a custom hand-drawn design system tying together painting, data, and code.
+  The portfolio site you're looking at right now, rebuilt as a small but real static-site pipeline: content lives as validated YAML data, templated through Jinja2 into static HTML, tested and auto-deployed via GitHub Actions. The visual design &mdash; a hand-drawn brush-stroke motif nodding to an oil-and-charcoal painting practice &mdash; is unchanged from the original version; only the build system underneath it changed.
 approach:
 - |-
-  Designed a custom token system &mdash; a warm-paper palette with indigo and ochre accents, Fraunces/Inter/IBM Plex Mono type pairing, and a hand-drawn brush-stroke signature motif nodding to an oil-and-charcoal painting practice.
+  Separated content from code: every project and coursework entry is its own YAML file under <code>data/</code>, validated against a schema (<code>content/schema.py</code>) that fails the build with a clear file name and reason on any malformed entry, rather than producing silently broken HTML.
 - |-
-  Built a Python generator (build.py) that templates all pages &mdash; shared nav, footer, and layout &mdash; from structured project and coursework data, so content changes never require hand-editing HTML.
+  Replaced hand-written f-string HTML generation with Jinja2 templates using proper inheritance and shared partials (nav, footer, card grid, PDF/PPTX preview cards), so a layout change propagates everywhere from one file.
 - |-
-  Implemented an embedded r&eacute;sum&eacute; viewer, card-grid index pages, and detail pages with linked repos and documents for every project and course.
+  Wrote a test suite (schema validity, slug uniqueness, link hygiene, document-folder sync) and a GitHub Actions workflow that runs the tests, builds the site, and deploys to GitHub Pages automatically on every push &mdash; verified the whole pipeline end to end, including deliberately breaking a YAML file to confirm validation actually catches it.
 - |-
-  Shipped as plain static files with zero build step, deployable via GitHub Pages, Netlify Drop, or Vercel.
+  Built a document-preview system for the Links &amp; Documents section: PDF links render as live first-page thumbnails that open in an in-page lightbox on click; PPTX links get a styled placeholder card, since browsers can't render PowerPoint natively.
 links:
 - label: GitHub repository
-  href: '#'
+  href: 'https://github.com/hkbuttar/Portfolio'
 - label: Live site
-  href: '#'
+  href: 'https://hkbuttar.github.io/Portfolio/'

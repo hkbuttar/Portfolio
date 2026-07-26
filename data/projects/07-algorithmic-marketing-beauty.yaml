@@ -25,6 +25,10 @@ approach:
   Built content-based recommendation engines (substitutes, complements, trade-up/trade-down) per retailer and a unified cross-retailer engine with category-alias matching and two-pass selection guaranteeing cross-platform representation.
 - |-
   Applied PCA-based dual-retailer perceptual mapping, Granger causality testing for cross-platform sentiment spillover, and Difference-in-Differences with propensity score matching to causally estimate the effect of reputation shocks on review velocity, rating, and sentiment by price tier.
+- |-
+  Surfaced concrete, actionable segments rather than abstract clusters &mdash; e.g. Sephora's "Polarizing Problem Children" (lowest ratings, highest variance, elevated helpfulness signaling purchase anxiety) as an intervention queue, and an Ulta segment with 57.3% verified reviewers but only 9.0% verified buyers, flagging visibility built substantially on incentivized reviews. Found that nearly 60% of Sephora's most "disappointed & vocal" products register as neutral-to-positive on Ulta, showing platform signals don't reliably transfer.
 links:
 - label: GitHub repository
   href: https://github.com/hkbuttar/Algorithmic_Marketing_Final_Project
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/algorithmic-marketing-beauty/Analyzing-Beauty-Retailers.pptx
