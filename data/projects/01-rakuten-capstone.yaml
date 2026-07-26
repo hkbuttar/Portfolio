@@ -1,0 +1,38 @@
+slug: rakuten-capstone
+tag: PROJECT 01
+title: Retail Demand Forecasting & PEFT Benchmarking
+org: Rakuten Advertising · Capstone
+dates: Jan 2026 &ndash; Aug 2026
+team: with Kevin Fan, Aren Mizuno, Kai Schindler
+short: |-
+  A full-stack forecasting dashboard benchmarking twelve time-series models and seven PEFT fine-tuning techniques on NIQ retail data.
+stack:
+- Python
+- FastAPI
+- Vite
+- React
+- Recharts
+- LightGBM
+- XGBoost
+- Chronos
+- TimesFM
+overview: |-
+  A capstone project built with Rakuten Advertising comparing classical, machine-learning, and foundation-model approaches to retail demand forecasting, alongside parameter-efficient fine-tuning techniques, across receipt-level NIQ data spanning Luxury Brand Retail, Luxury Department Retail, and Travel verticals.
+approach:
+- |-
+  Benchmarked SARIMA, SARIMAX, ETS, GARCH, and VAR against LightGBM, XGBoost, and foundation time-series models (Chronos, TimesFM, TTM, MOMENT, Moirai).
+- |-
+  Evaluated PEFT fine-tuning techniques &mdash; LoRA, QLoRA, DoRA, BitFit, P-Tuning, Prompt Tuning, and Prefix Tuning &mdash; for adapting foundation models to retail-specific patterns.
+- |-
+  Built a Vite + React PWA dashboard with multi-model comparison charts, confidence bands, residual plots, metric toggles, and CSV/PNG export, backed by a FastAPI service with GZip compression.
+- |-
+  Authored the methodology and conclusion sections of the capstone paper and produced the metrics slide for the final presentation deck.
+links:
+- label: Live dashboard
+  href: '#'
+- label: GitHub repository
+  href: '#'
+- label: Capstone paper (PDF)
+  href: assets/documents/projects/rakuten-capstone/capstone-paper.pdf
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/rakuten-capstone/presentation-deck.pptx

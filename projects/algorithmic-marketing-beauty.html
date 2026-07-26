@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithmic Marketing Optimization in the Beauty Industry · Harleen Kaur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script src="../doc-viewer.js" defer></script>
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <svg class="mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" />
+        <path d="M13 12v16M13 20h6.5M27 12v16" />
+      </svg>
+      <span>Harleen Kaur</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../coursework.html">Coursework</a></li>
+      </ul>
+      <a class="resume-btn" href="../index.html#resume">View Résumé</a>
+    </nav>
+  </div>
+</header><main>
+<article class="detail">
+  <a class="back-link" href="../projects.html">&larr; All Projects</a>
+  <p class="detail-tag">PROJECT 07</p>
+  <h1>Algorithmic Marketing Optimization in the Beauty Industry</h1>
+  <div class="detail-meta">
+    <span>Independent Project</span>
+    <span>2025 &ndash; 2026</span>
+<span>Solo</span>  </div>
+<svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+</svg>  <section>
+    <h2>Overview</h2>
+    <p>An end-to-end algorithmic marketing framework analyzing beauty products across Sephora and Ulta, jointly modeling consumer perception, perceived value, price context, and demand dynamics within and across the two retail platforms.</p>
+  </section>
+  <section>
+    <h2>Approach</h2>
+    <ul class="approach-list"><li>Built resumable, crash-safe Selenium/BeautifulSoup scrapers pulling product and review data from Sephora (Bazaarvoice API) and Ulta (PowerReviews API), then matched brands and products across retailers via fuzzy string matching into a cross-retailer product graph.</li><li>Ran per-retailer market segmentation with K-Means, Hierarchical Clustering, and Gaussian Mixture Models, and built brand-health pipelines using VADER sentiment and NMF topic modeling to surface delighters, disappointers, and rating-sentiment mismatches.</li><li>Built content-based recommendation engines (substitutes, complements, trade-up/trade-down) per retailer and a unified cross-retailer engine with category-alias matching and two-pass selection guaranteeing cross-platform representation.</li><li>Applied PCA-based dual-retailer perceptual mapping, Granger causality testing for cross-platform sentiment spillover, and Difference-in-Differences with propensity score matching to causally estimate the effect of reputation shocks on review velocity, rating, and sentiment by price tier.</li></ul>
+  </section>
+  <section>
+    <h2>Tech Stack</h2>
+    <div class="detail-stack"><span>Selenium</span><span>BeautifulSoup</span><span>VADER</span><span>NMF</span><span>scikit-learn</span><span>Plotly</span><span>statsmodels</span></div>
+  </section>
+  <section>
+    <h2>Links &amp; Documents</h2>
+    <ul class="links-list"><li><a href="https://github.com/hkbuttar/Algorithmic_Marketing_Final_Project" target="_blank" rel="noopener">GitHub repository &rarr;</a></li></ul>
+    <p class="placeholder-note">Note &mdash; drop PDF/PPTX files into <code>assets/documents/projects/algorithmic-marketing-beauty/</code> and point the matching href above at that filename (e.g. <code>assets/documents/projects/algorithmic-marketing-beauty/deck.pptx</code>). Click a PDF card to preview it in place; PPTX cards open/download since browsers can't render PowerPoint natively. Swap any remaining placeholder <code>#</code> hrefs for real repo/demo links.</p>
+  </section>
+</article>
+</main>
+<footer class="site-footer">
+  <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+  </svg>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-name">Harleen Kaur</p>
+      <p class="footer-tag">Data Scientist &amp; Visual Artist &mdash; Chicago, IL</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:youremail@example.com">Email</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+      <a href="../index.html#resume">R&eacute;sum&eacute;</a>
+    </div>
+  </div>
+  <p class="footer-note">&copy; 2026 Harleen Kaur. Built by hand, no frameworks.</p>
+</footer></body>
+</html>

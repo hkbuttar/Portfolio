@@ -1,0 +1,29 @@
+slug: sentiment-rating-mismatch
+tag: PROJECT 05
+title: Large-Scale Sentiment&ndash;Rating Mismatch Detection
+org: Independent Project
+dates: Sep 2025 &ndash; Dec 2025
+team: Solo
+short: |-
+  A distributed PySpark pipeline on GCP Dataproc identifying mismatches between review sentiment and star ratings in Amazon review data.
+stack:
+- PySpark
+- GCP Dataproc
+- GCS
+- TF-IDF
+- Word2Vec
+- LDA
+overview: |-
+  A distributed data pipeline processing large-scale Amazon review data to surface cases where written sentiment disagreed with the numeric star rating, a signal useful for review-quality and fraud detection.
+approach:
+- |-
+  Built a distributed PySpark pipeline on GCP Dataproc to process review data at scale, with outputs written to Google Cloud Storage.
+- |-
+  Applied TF-IDF and Word2Vec representations alongside K-Means clustering, LSH, and LDA topic modeling to characterize review content.
+- |-
+  Flagged sentiment&ndash;rating mismatches as a proxy signal for unreliable or manipulated reviews.
+links:
+- label: GitHub repository
+  href: '#'
+- label: Pipeline documentation (PDF)
+  href: assets/documents/projects/sentiment-rating-mismatch/pipeline-documentation.pdf

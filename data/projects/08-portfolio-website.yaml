@@ -1,0 +1,28 @@
+slug: portfolio-website
+tag: PROJECT 08
+title: Personal Portfolio Website
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  This site &mdash; a static, dependency-free multi-page portfolio with a custom design system and a Python page generator.
+stack:
+- Python
+- HTML
+- CSS
+overview: |-
+  The portfolio site you're looking at right now: a static, framework-free multi-page site (Home, Projects, Coursework, and individual detail pages) built entirely from a Python template generator, with a custom hand-drawn design system tying together painting, data, and code.
+approach:
+- |-
+  Designed a custom token system &mdash; a warm-paper palette with indigo and ochre accents, Fraunces/Inter/IBM Plex Mono type pairing, and a hand-drawn brush-stroke signature motif nodding to an oil-and-charcoal painting practice.
+- |-
+  Built a Python generator (build.py) that templates all pages &mdash; shared nav, footer, and layout &mdash; from structured project and coursework data, so content changes never require hand-editing HTML.
+- |-
+  Implemented an embedded r&eacute;sum&eacute; viewer, card-grid index pages, and detail pages with linked repos and documents for every project and course.
+- |-
+  Shipped as plain static files with zero build step, deployable via GitHub Pages, Netlify Drop, or Vercel.
+links:
+- label: GitHub repository
+  href: '#'
+- label: Live site
+  href: '#'

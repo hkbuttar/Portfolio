@@ -1,0 +1,19 @@
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="{{ depth }}index.html">
+      <svg class="mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" />
+        <path d="M13 12v16M13 20h6.5M27 12v16" />
+      </svg>
+      <span>Harleen Kaur</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="{{ depth }}index.html"{% if active == "home" %} class="active"{% endif %}>Home</a></li>
+        <li><a href="{{ depth }}projects.html"{% if active == "projects" %} class="active"{% endif %}>Projects</a></li>
+        <li><a href="{{ depth }}coursework.html"{% if active == "coursework" %} class="active"{% endif %}>Coursework</a></li>
+      </ul>
+      <a class="resume-btn" href="{{ depth }}index.html#resume">View Résumé</a>
+    </nav>
+  </div>
+</header>

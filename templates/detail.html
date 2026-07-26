@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% import "partials/doc_card.html" as doc %}
+
+{% block content %}
+<article class="detail">
+  <a class="back-link" href="../{{ kind }}.html">&larr; All {{ "Projects" if kind == "projects" else "Coursework" }}</a>
+  <p class="detail-tag">{{ item.tag }}</p>
+  <h1>{{ item.title }}</h1>
+  <div class="detail-meta">
+    <span>{{ item.org }}</span>
+    <span>{{ item.dates }}</span>
+    {% if item.team %}<span>{{ item.team }}</span>{% endif %}
+  </div>
+  {% include "partials/brush.html" %}
+  <section>
+    <h2>Overview</h2>
+    <p>{{ item.overview }}</p>
+  </section>
+  <section>
+    <h2>Approach</h2>
+    <ul class="approach-list">{% for step in item.approach %}<li>{{ step }}</li>{% endfor %}</ul>
+  </section>
+  <section>
+    <h2>Tech Stack</h2>
+    <div class="detail-stack">{% for s in item.stack %}<span>{{ s }}</span>{% endfor %}</div>
+  </section>
+  <section>
+    <h2>Links &amp; Documents</h2>
+    {% if item.doc_links %}
+    <div class="doc-grid">{% for link in item.doc_links %}{{ doc.doc_card(link) }}{% endfor %}</div>
+    {% endif %}
+    {% if item.other_links %}
+    <ul class="links-list">{% for link in item.other_links %}<li><a href="{{ link.href }}" target="_blank" rel="noopener">{{ link.label }} &rarr;</a></li>{% endfor %}</ul>
+    {% endif %}
+    <p class="placeholder-note">Note &mdash; drop PDF/PPTX files into <code>assets/documents/{{ kind }}/{{ item.slug }}/</code> and point the matching href above at that filename (e.g. <code>assets/documents/{{ kind }}/{{ item.slug }}/deck.pptx</code>). Click a PDF card to preview it in place; PPTX cards open/download since browsers can't render PowerPoint natively. Swap any remaining placeholder <code>#</code> hrefs for real repo/demo links.</p>
+  </section>
+</article>
+{% endblock %}

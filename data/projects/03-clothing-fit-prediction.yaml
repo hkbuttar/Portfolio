@@ -1,0 +1,26 @@
+slug: clothing-fit-prediction
+tag: PROJECT 03
+title: Clothing Fit Prediction & Size Recommendation
+org: Independent Project
+dates: Jan 2026 &ndash; Mar 2026
+team: Solo
+short: |-
+  Fit prediction and collaborative-filtering size recommendation across 192,000+ RentTheRunway and ModCloth transactions.
+stack:
+- Python
+- scikit-learn
+- SMOTE
+- Collaborative Filtering
+- Clustering
+overview: |-
+  A recommender system tackling the online apparel fit problem: predicting whether a garment will run small, true-to-size, or large, and recommending sizes using collaborative filtering.
+approach:
+- |-
+  Built customer and garment clustering to segment fit behavior across the combined RentTheRunway and ModCloth transaction data.
+- |-
+  Trained and compared seven classifiers for fit prediction, applying SMOTE to correct for severe class imbalance in fit outcomes.
+- |-
+  Layered a collaborative-filtering recommender on top of the fit classifier to generate personalized size suggestions.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/Machine-Learning-Final-Project

@@ -1,0 +1,29 @@
+slug: uk-produce-forecasting
+tag: PROJECT 04
+title: UK Fruit & Vegetable Price Forecasting
+org: Team Project
+dates: Jan 2026 &ndash; Mar 2026
+team: with Minhao Zhang and team
+short: |-
+  Weekly price forecasting for 20 UK fruit and vegetable commodities using a 184-feature dataset and nine modeling approaches.
+stack:
+- Python
+- R
+- ARIMA
+- SARIMA/ARIMAX
+- VAR/VARMA
+- Holt-Winters
+- DeepAR
+- Mamba
+overview: |-
+  A comparative time-series study forecasting weekly retail prices for 20 fruit and vegetable commodities in the UK market, spanning classical statistical models in R through modern deep sequence architectures in Python.
+approach:
+- |-
+  Built a 184-feature weekly dataset (data/processed/merged_features_weekly.parquet) combining commodity prices with exogenous signals &mdash; UK agricultural price indices, road fuel prices, and the ONS SPPI freight index &mdash; plus lags, rolling stats, YoY deltas, cyclical calendar features, and shock indicators for the 2021Q4&ndash;2023Q1 energy crisis.
+- |-
+  Benchmarked ARIMA, Holt-Winters, VAR, VARMA, and linear regression with ARIMA errors in R against SARIMA/ARIMAX, DeepAR, and Mamba sequence models in Python, with Granger causality and stationarity testing to validate exogenous relationships.
+- |-
+  Evaluated all models on a held-out 2025 test set (trained through Dec 2024, tested from Jan 2025 onward) and compared forecast accuracy and stability across commodities with differing seasonality and volatility profiles.
+links:
+- label: GitHub repository
+  href: https://github.com/Minhao-Zhang/ADSP_31006_Final_Project

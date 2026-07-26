@@ -1,0 +1,30 @@
+slug: ai-ml-news-analysis
+tag: PROJECT 06
+title: Large-Scale AI/ML News Analysis
+org: Independent Project
+dates: '2025'
+team: Solo
+short: |-
+  Topic modeling, NER, and sentiment analysis across 200,000+ AI/ML news articles, culminating in a 25-slide deck.
+stack:
+- spaCy
+- DistilBERT
+- ChromaDB
+- GPT-4o-mini
+- Plotly
+overview: |-
+  An eight-notebook analysis pipeline processing over 200,000 AI/ML news articles: EDA, translation, cleaning, topic modeling, named entity recognition, sentiment fine-tuning, and a retrieval-augmented Q&A layer.
+approach:
+- |-
+  Ran LDA topic modeling with k=30 topics and spaCy-based named entity recognition across the full corpus.
+- |-
+  Fine-tuned DistilBERT for sentiment on the dair-ai/emotion dataset and applied it to article-level sentiment scoring.
+- |-
+  Built a ChromaDB-backed RAG layer with GPT-4o-mini for interactive querying, and produced async-rendered Plotly visualizations via Playwright.
+- |-
+  Synthesized findings into a 25-slide presentation deck.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/AI_Impact
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/ai-ml-news-analysis/presentation-deck.pptx

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% import "partials/card.html" as c %}
+
+{% block content %}
+<section class="index-hero">
+  <h1>{{ heading }}</h1>
+  {% include "partials/brush.html" %}
+  <p>{{ intro }}</p>
+</section>
+<section class="grid">
+{% for item in items %}{{ c.card(item, kind) }}{% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% macro card(item, kind) %}
+<a class="card" href="{{ kind }}/{{ item.slug }}.html">
+  <p class="card-tag">{{ item.tag }}</p>
+  <h3>{{ item.title }}</h3>
+  <p class="card-sub">{{ item.org }}</p>
+  <p class="card-desc">{{ item.short }}</p>
+  <div class="card-stack">{% for s in item.stack[:4] %}<span>{{ s }}</span>{% endfor %}</div>
+  <span class="card-link">View details &rarr;</span>
+</a>
+{% endmacro %}

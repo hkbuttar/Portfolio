@@ -1,0 +1,25 @@
+slug: advanced-ml-ai
+tag: MACHINE LEARNING I & II
+title: Advanced Machine Learning &amp; AI Coursework
+org: Machine Learning I &amp; Machine Learning II
+dates: 2025 &ndash; 2026
+short: |-
+  Ten assignments spanning generative models, contrastive learning, sequence models, and transfer learning, delivered as Colab notebooks.
+stack:
+- PyTorch
+- scikit-learn
+- NumPy
+overview: |-
+  A ten-assignment sequence covering the core toolkit of modern machine learning and deep learning, from foundational architectures through generative and self-supervised methods, each delivered as a self-contained Colab notebook.
+approach:
+- |-
+  Implemented feedforward networks from first principles (MSE/BCE/softmax losses) and a full MNIST classification pipeline.
+- |-
+  Built Word2Vec skip-gram embeddings and trained RNNs, LSTMs, and GRUs on Tiny Shakespeare for character-level generation.
+- |-
+  Implemented VAEs, GANs, and DCGANs for image generation, and SimCLR for contrastive self-supervised representation learning.
+- |-
+  Applied transfer learning with ResNet-18 on CIFAR-10 and evaluated multiple pretrained architectures on ImageNet.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/ML-AI

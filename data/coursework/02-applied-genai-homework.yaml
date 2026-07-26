@@ -1,0 +1,30 @@
+slug: applied-genai-homework
+tag: APPLIED GENERATIVE AI
+title: Applied Generative AI Coursework
+org: Applied Generative AI
+dates: Summer 2026
+short: |-
+  Fine-tuning, retrieval, speech pipelines, and agentic workflows &mdash; SFT/QLoRA, RAG, offline speech-to-speech, LangGraph search agents, and adversarial agent evaluation.
+stack:
+- PyTorch
+- PEFT/QLoRA
+- ChromaDB
+- LangGraph
+- n8n
+- SpeechBrain
+overview: |-
+  A collection of Applied Generative AI assignments spanning the full stack of modern LLM techniques: supervised fine-tuning and QLoRA, retrieval-augmented generation, offline speech-to-speech systems, agentic search workflows, prompt design, and adversarial agent evaluation.
+approach:
+- |-
+  Built an SFT/QLoRA pipeline to fine-tune an LLM for tool-picking behavior on function-calling data.
+- |-
+  Built a RAG system over agentic-AI research concepts using ChromaDB, with retrieval quality visualized via PCA and UMAP embeddings and evaluated with RAGAS scores.
+- |-
+  Built an offline speech-to-speech LLM system chaining transcription, language understanding, and speech synthesis with no external API calls.
+- |-
+  Built and evaluated a LangGraph web search agent, and separately implemented the same search-assistant pattern as a no-code n8n workflow (guardrails &rarr; reasoning &rarr; web search &rarr; reflection &rarr; response).
+- |-
+  Designed and tested prompts for a medical AI assistant use case, and ran adversarial evaluation of an agent using the ProofAgent Harness.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/Applied_Generative_AI_Homework

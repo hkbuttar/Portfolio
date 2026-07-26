@@ -1,0 +1,29 @@
+slug: qlora-recipe-chef
+tag: PROJECT 02
+title: QLoRA Recipe Chef
+org: Independent Project
+dates: Mar 2026 &ndash; Jun 2026
+team: Solo
+short: |-
+  Qwen2.5-1.5B-Instruct fine-tuned with QLoRA and LoRA on RecipeNLG, served through an interactive Gradio app.
+stack:
+- Python
+- PyTorch
+- PEFT
+- QLoRA
+- Gradio
+- Hugging Face
+overview: |-
+  An end-to-end fine-tuning project adapting a small instruction-tuned language model into a recipe-generation assistant, comparing full LoRA against quantized QLoRA training under constrained compute.
+approach:
+- |-
+  Fine-tuned Qwen2.5-1.5B-Instruct on the RecipeNLG dataset using both LoRA and QLoRA to compare training efficiency and output quality.
+- |-
+  Wrapped the fine-tuned model in a Gradio interface for interactive recipe generation from ingredient lists.
+- |-
+  Evaluated generation quality, coherence, and adherence to ingredient constraints across adapter configurations.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/QLoRA_Recipe_Chef
+- label: Gradio demo
+  href: '#'
