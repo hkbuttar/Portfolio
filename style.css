@@ -217,7 +217,7 @@ img, svg { display: block; max-width: 100%; }
 
 .resume-viewer iframe {
   width: 100%;
-  height: 640px;
+  height: 800px;
   border: 1px solid var(--line);
   border-radius: 4px;
   background: var(--paper-raised);
