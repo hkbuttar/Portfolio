@@ -1,30 +1,29 @@
 # Portfolio Site
 
 A statically-generated portfolio: **content is data, not code**. Every
-project and coursework entry lives as a validated YAML file; a small,
-tested Python build system renders them through Jinja2 templates into
-plain static HTML. No JavaScript framework, no Node — the *output* is a
-handful of `.html`/`.css`/`.js` files deployable anywhere, but the
-*build* is a real pipeline: schema validation, a test suite, and CI/CD
-that deploys automatically on every push.
+project, coursework, and work-experience entry lives as a validated YAML
+file; a small, tested Python build system renders them through Jinja2
+templates into plain static HTML. No JavaScript framework, no Node — the
+*output* is a handful of `.html`/`.css`/`.js` files deployable anywhere,
+but the *build* is a real pipeline: schema validation, a test suite, and
+CI/CD that deploys automatically on every push.
 
 ## Why this structure
 
-The previous version of this generator worked, but content and code were
-tangled together in one big Python file — adding a project meant editing a
-Python dictionary by hand, with no validation and no safety net. This
-version separates concerns properly:
+Content and code are kept deliberately separate:
 
 | Layer | Lives in | Changes when... |
 |---|---|---|
-| **Content** | `data/projects/*.yaml`, `data/coursework/*.yaml` | you add/edit a project or course |
+| **Content** | `data/projects/*.yaml`, `data/coursework/*.yaml`, `data/experience/*.yaml` | you add/edit a project, course, or job |
 | **Schema/validation** | `content/schema.py` | you change what fields an entry requires |
 | **Presentation** | `templates/*.html` | you change layout/markup |
 | **Design tokens** | `style.css` | you change colors/type/spacing |
 | **Orchestration** | `build.py` | rarely — it just wires the above together |
 
-Adding a project is now a content change, not a code change: drop in a
-YAML file, run the build. No template touched, no Python edited.
+Adding a project, course, or job is a content change, not a code change:
+drop in a YAML file, run the build. Education is the one exception — it's
+a genuinely static page (two degrees, unlikely to grow), so it's hand-written
+directly in `templates/education.html` rather than YAML-driven.
 
 ## Structure
 
@@ -32,50 +31,50 @@ YAML file, run the build. No template touched, no Python edited.
 .
 ├── data/
 │   ├── projects/            # one YAML file per project (10 currently)
-│   │   ├── 01-rakuten-capstone.yaml
-│   │   ├── 02-qlora-recipe-chef.yaml
-│   │   └── ...
-│   └── coursework/           # one YAML file per coursework entry (2 currently)
-│       ├── 01-advanced-ml-ai.yaml
-│       └── 02-applied-genai-homework.yaml
+│   ├── coursework/           # one YAML file per coursework entry (2 currently)
+│   └── experience/           # one YAML file per job (8 currently)
 │
 ├── content/
 │   └── schema.py             # Entry/Link dataclasses + validation rules
 │
 ├── templates/                 # Jinja2, with inheritance + shared partials
 │   ├── base.html              # page shell: <head>, nav, footer
-│   ├── home.html               # extends base — hero/about/résumé
-│   ├── index.html              # extends base — the projects/coursework grid
-│   ├── detail.html             # extends base — a single project/course page
+│   ├── home.html               # extends base — hero (incl. profile photo)/about/résumé
+│   ├── education.html          # extends base — static page, hand-written (not YAML)
+│   ├── index.html              # extends base — the projects/coursework/experience grid
+│   ├── detail.html             # extends base — a single project/course/job page
 │   └── partials/
 │       ├── nav.html, footer.html, brush.html   # shared chrome
 │       ├── card.html            # index-grid card macro
 │       └── doc_card.html        # PDF/PPTX preview card macro
 │
 ├── tests/
-│   └── test_content.py        # schema validity, unique slugs, link hygiene
+│   └── test_content.py        # schema validity, unique slugs, link hygiene (13 tests)
 │
 ├── scripts/
-│   └── new_entry.py            # scaffolds a new YAML entry from the CLI
+│   └── new_entry.py            # scaffolds a new project/coursework YAML entry from the CLI
 │
 ├── .github/workflows/
 │   └── deploy.yml              # CI: test → build → deploy to GitHub Pages
 │
 ├── assets/
-│   ├── resume.pdf              # placeholder — replace with your real résumé
+│   ├── HARLEEN-BUTTAR.pdf      # résumé, embedded on the home page
+│   ├── profile-photo.png       # hero section photo (circular crop)
 │   └── documents/
-│       ├── projects/<slug>/    # auto-synced to match data/projects/
-│       └── coursework/<slug>/  # auto-synced to match data/coursework/
+│       ├── projects/<slug>/    # auto-synced to match data/projects/ — 7 already have real decks/reports
+│       ├── coursework/<slug>/  # auto-synced to match data/coursework/
+│       └── experience/<slug>/  # auto-synced to match data/experience/
 │
-├── style.css                   # design system (colors, type, layout, doc-cards)
-├── doc-viewer.js                # PDF preview lightbox (unchanged from before)
+├── style.css                   # design system (colors, type, layout, doc-cards, hero photo)
+├── doc-viewer.js                # PDF preview lightbox
 ├── build.py                     # loads YAML → validates → renders → writes
 ├── requirements.txt
 ├── Makefile
 │
-└── index.html, projects.html, coursework.html,   ← generated output
-    projects/*.html, coursework/*.html,             (rebuilt from templates
-    sitemap.xml                                      + data every build)
+└── index.html, projects.html, coursework.html, experience.html, education.html,
+    projects/*.html, coursework/*.html, experience/*.html,   ← generated output
+    sitemap.xml                                                (rebuilt from templates
+                                                                 + data every build)
 ```
 
 ## Quickstart
@@ -86,12 +85,16 @@ python3 build.py          # or: make build
 python3 -m http.server    # or: make serve
 ```
 
-## Adding a project or coursework entry
+## Adding a project, coursework, or experience entry
 
 ```bash
 python3 scripts/new_entry.py project my-new-project
 # → creates data/projects/11-my-new-project.yaml with placeholder fields
 ```
+
+(Swap `project` for `coursework` to scaffold a coursework entry the same
+way. `experience` entries don't currently have a scaffold script — copy an
+existing file in `data/experience/` as a starting template instead.)
 
 Fill in the placeholders (title, dates, stack, overview, approach bullets,
 links), then rebuild:
@@ -102,14 +105,16 @@ python3 build.py
 
 That's it — no template or Python code needs to change. The build:
 
-1. Loads every `.yaml` file in `data/projects/` and `data/coursework/`
-   (numeric filename prefixes control display order).
+1. Loads every `.yaml` file in `data/projects/`, `data/coursework/`, and
+   `data/experience/` (numeric filename prefixes control display order).
 2. **Validates** each one against the schema in `content/schema.py` — a
-   missing field, wrong type, bad slug format, or duplicate slug fails the
-   build immediately with the exact file and reason, rather than silently
+   missing field, wrong type, bad slug format, duplicate slug, or an
+   empty/malformed YAML file fails the build immediately with the exact
+   file and reason, rather than crashing with a raw traceback or silently
    producing broken HTML.
-3. Renders `index.html`, `projects.html`, `coursework.html`, and one
-   detail page per entry through the Jinja2 templates.
+3. Renders `index.html`, `projects.html`, `coursework.html`,
+   `experience.html`, `education.html`, and one detail page per
+   project/coursework/experience entry through the Jinja2 templates.
 4. Deletes stale pages for any entry you removed, and syncs
    `assets/documents/<kind>/<slug>/` folders to match current content
    (creating new ones, removing orphaned ones).
@@ -124,11 +129,12 @@ page and its document folder are cleaned up automatically.
 python3 -m unittest tests.test_content -v     # or: make test
 ```
 
-Covers: every YAML file parses and validates; slugs are unique and
-URL-safe within and across sections; every entry has at least one
-non-empty link; every entry's document folder exists after a build. These
-run automatically in CI on every push and pull request — a broken content
-file fails the check before it can reach the live site.
+Covers: every YAML file (projects, coursework, *and* experience) parses
+and validates; slugs are unique and URL-safe within and across all three
+sections; every entry has at least one non-empty link; every entry's
+document folder exists after a build. These run automatically in CI on
+every push and pull request — a broken content file fails the check
+before it can reach the live site.
 
 ## Continuous deployment
 
@@ -137,6 +143,11 @@ dependencies → run the test suite → build → deploy to GitHub Pages. To
 enable it on your fork: push this repo to GitHub, then in
 **Settings → Pages**, set the source to **GitHub Actions**. From then on,
 editing a YAML file and pushing is the entire deploy process.
+
+If a workflow run shows green on `test-and-build` but red on `deploy`
+the very first time you enable Pages, it's usually because the Pages site
+itself hadn't finished provisioning yet — reselecting "GitHub Actions" as
+the source in Settings → Pages and re-running the job resolves it.
 
 ## Document previews (PDF/PPTX)
 
@@ -149,18 +160,36 @@ links as visual preview cards, not plain text:
 - **PPTX** — a styled placeholder icon (browsers can't render PowerPoint
   natively); click to open/download.
 
-To attach one: drop the file into `assets/documents/<projects|coursework>/<slug>/`,
-point the entry's YAML `links:` at it, rebuild.
+To attach one: drop the file into
+`assets/documents/<projects|coursework|experience>/<slug>/`, point the
+entry's YAML `links:` at it (matching the exact filename — spaces and
+special characters in a real uploaded filename are fine, just make sure
+the `href` matches exactly), rebuild.
 
-## Before you deploy — 3 things to fill in
+## Site sections
 
-1. **Résumé** — replace `assets/resume.pdf` with your real résumé (same
-   filename).
-2. **Links** — several entries still have placeholder `href: '#'` links
-   (live demos, a couple of unconfirmed repos, and this site's own
-   repo/live-site links once you push it). Search `data/` for `href: '#'`.
-3. **Contact info** — in `templates/partials/footer.html`, replace the
-   email, LinkedIn, and GitHub placeholder URLs with your real ones.
+- **Home** (`index.html`) — hero with photo, About, embedded résumé viewer
+- **Education** (`education.html`) — static page, two degrees, hand-written
+- **Experience** (`experience.html` + `experience/*.html`) — 8 roles, card
+  grid → full detail page each
+- **Projects** (`projects.html` + `projects/*.html`) — 10 entries
+- **Coursework** (`coursework.html` + `coursework/*.html`) — 2 entries
+
+Nav order: Home / Education / Experience / Projects / Coursework.
+
+## Status — what's real vs. still placeholder
+
+- ✅ Résumé (`assets/HARLEEN-BUTTAR.pdf`), embedded and working
+- ✅ Profile photo in the hero section
+- ✅ 7 of 10 projects have real GitHub repo links; 7 have real PDF/PPTX
+  document previews attached
+- ⬜ A few entries still have placeholder `href: '#'` links (live demos, a
+  couple of unconfirmed repos, and the portfolio site's own repo/live-site
+  links once pushed). Search `data/` for `href: '#'`.
+- ⬜ Footer contact info (`templates/partials/footer.html`) — email,
+  LinkedIn, and GitHub are still placeholder URLs as of this file; update
+  the `mailto:`, LinkedIn, and GitHub links there with your real ones if
+  you haven't already.
 
 ## Deploying
 
@@ -171,7 +200,7 @@ point the entry's YAML `links:` at it, rebuild.
 python3 build.py
 git add . && git commit -m "Update portfolio" && git push
 ```
-Enable Pages in repo settings (Deploy from branch → main) once.
+Enable Pages in repo settings (Source → GitHub Actions) once.
 
 **Netlify Drop** — run `python3 build.py`, then drag the whole folder into
 [netlify.com/drop](https://app.netlify.com/drop).
@@ -185,9 +214,6 @@ Enable Pages in repo settings (Deploy from branch → main) once.
 - **Type**: Fraunces (display/headings), Inter (body), IBM Plex Mono
   (labels, tags, meta info).
 - **Signature motif**: a hand-drawn brush-stroke underline (SVG, animates
-  in on load) under every section heading — a nod to your painting
-  practice.
+  in on load) under every section heading, and a small brush accent on the
+  hero photo — a nod to your painting practice.
 - All tokens live at the top of `style.css` under `:root`.
-
-This layer is unchanged from the previous version of this site — only the
-build system changed, not the design.
