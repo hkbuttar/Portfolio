@@ -30,7 +30,7 @@ directly in `templates/education.html` rather than YAML-driven.
 ```
 .
 ├── data/
-│   ├── projects/            # one YAML file per project (10 currently)
+│   ├── projects/            # one YAML file per project (11 currently)
 │   ├── coursework/           # one YAML file per coursework entry (2 currently)
 │   └── experience/           # one YAML file per job (8 currently)
 │
@@ -181,7 +181,7 @@ Nav order: Home / Education / Experience / Projects / Coursework.
 
 - ✅ Résumé (`assets/HARLEEN-BUTTAR.pdf`), embedded and working
 - ✅ Profile photo in the hero section
-- ✅ 7 of 10 projects have real GitHub repo links; 7 have real PDF/PPTX
+- ✅ 8 of 11 projects have real GitHub repo links; 7 have real PDF/PPTX
   document previews attached
 - ⬜ A few entries still have placeholder `href: '#'` links (live demos, a
   couple of unconfirmed repos, and the portfolio site's own repo/live-site

@@ -1,0 +1,37 @@
+slug: markdown-price-optimizer
+tag: PROJECT 11
+title: Markdown Price Optimizer
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  A Mixed-Integer Program for retail markdown scheduling &mdash; optimal weekly discount tiers per SKU, recovering 23.6% more revenue than a flat-discount policy across 4,834 SKU-store pairs.
+stack:
+- Python
+- Pyomo
+- CBC
+- Streamlit
+- pandas
+- scikit-learn
+overview: |-
+  Retailers carrying seasonal or perishable-demand inventory must repeatedly decide how deeply to discount each product, each week, in the remaining selling window. This project formulates that decision as a Mixed-Integer Program on the public M5 (Walmart) dataset &mdash; a discrete price-tier selection per SKU per week, subject to inventory conservation, a clearance deadline, monotonic pricing, and a margin floor &mdash; solved via a hybrid decomposition since jointly optimizing the full catalog is computationally impractical.
+approach:
+- |-
+  Built a SKU-week panel from 8.4M raw M5 sales rows (3,049 items &times; 10 stores), then fit a per-SKU log-log price-elasticity curve for each item-store pair, falling back to a department-level pooled estimate when a SKU had too few observations or a degenerate fit.
+- |-
+  Filtered to the subset of the catalog reliable enough to price on &mdash; requiring a minimum R&sup2;, an economically sensible (negative, non-extreme) elasticity, and structural feasibility &mdash; keeping 4,834 of 30,490 SKUs (15.9%) and explicitly reporting why the rest were excluded rather than silently dropping them.
+- |-
+  Formulated the pricing decision as a linear MIP in Pyomo: binary discount-tier selection (0/10/20/30/50% off) per SKU-week, under inventory conservation, a 95% end-of-horizon clearance requirement, monotonic (non-increasing) pricing, and a margin floor &mdash; kept strictly linear by treating each tier's demand as a lookup against the fitted elasticity curve rather than a continuous price&times;demand term.
+- |-
+  Solved at scale via hybrid decomposition &mdash; department clustering, SKU batching within department, and rolling-horizon windows solved to proven optimality by CBC and stitched together by committing only part of each window's plan &mdash; clearing all 3,588 rolling-horizon windows across 7 departments in ~19 minutes on CPU only.
+- |-
+  Caught and fixed a real bug via visual inspection of a sample SKU's output: an earlier version allowed price to illegally reset upward across rolling-horizon window boundaries. Fixed it by carrying each SKU's last committed discount forward as a floor for the next window, added a dedicated regression test for exactly this failure mode, and reported the honest ~0.55% revenue cost of correctly enforcing the constraint rather than hiding the regression.
+- |-
+  Benchmarked against two naive baselines to make the headline number meaningful: the MIP-optimized schedule recovers 23.6% more revenue than a flat 20% discount policy and 12.0% more than a calendar-based markdown schedule, across all 4,834 modeled SKU-store pairs &mdash; backed by a 62-test CI suite and deployed as a live, interactive Streamlit demo.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/markdown-price-optimizer
+- label: Live demo
+  href: https://markdown-price-optimizer.streamlit.app/
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/markdown-price-optimizer/Aretail-markdown-optimization.pptx
