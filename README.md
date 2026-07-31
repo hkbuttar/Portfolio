@@ -32,7 +32,7 @@ directly in `templates/education.html` rather than YAML-driven.
 ├── data/
 │   ├── projects/            # one YAML file per project (11 currently)
 │   ├── coursework/           # one YAML file per coursework entry (2 currently)
-│   └── experience/           # one YAML file per job (8 currently)
+│   └── experience/           # one YAML file per job (9 currently)
 │
 ├── content/
 │   └── schema.py             # Entry/Link dataclasses + validation rules
@@ -49,7 +49,7 @@ directly in `templates/education.html` rather than YAML-driven.
 │       └── doc_card.html        # PDF/PPTX preview card macro
 │
 ├── tests/
-│   └── test_content.py        # schema validity, unique slugs, link hygiene (13 tests)
+│   └── test_content.py        # schema validity, unique slugs, link hygiene (9 tests)
 │
 ├── scripts/
 │   └── new_entry.py            # scaffolds a new project/coursework YAML entry from the CLI
@@ -61,9 +61,9 @@ directly in `templates/education.html` rather than YAML-driven.
 │   ├── HARLEEN-BUTTAR.pdf      # résumé, embedded on the home page
 │   ├── profile-photo.png       # hero section photo (circular crop)
 │   └── documents/
-│       ├── projects/<slug>/    # auto-synced to match data/projects/ — 7 already have real decks/reports
+│       ├── projects/<slug>/    # auto-synced to match data/projects/ — 8 already have real decks/reports
 │       ├── coursework/<slug>/  # auto-synced to match data/coursework/
-│       └── experience/<slug>/  # auto-synced to match data/experience/
+│       └── experience/<slug>/  # auto-synced to match data/experience/ — 1 already has real docs
 │
 ├── style.css                   # design system (colors, type, layout, doc-cards, hero photo)
 ├── doc-viewer.js                # PDF preview lightbox
@@ -89,12 +89,21 @@ python3 -m http.server    # or: make serve
 
 ```bash
 python3 scripts/new_entry.py project my-new-project
-# → creates data/projects/11-my-new-project.yaml with placeholder fields
+# → creates data/projects/12-my-new-project.yaml with placeholder fields
 ```
 
 (Swap `project` for `coursework` to scaffold a coursework entry the same
 way. `experience` entries don't currently have a scaffold script — copy an
 existing file in `data/experience/` as a starting template instead.)
+
+All three kinds share the same YAML schema and the same `detail.html`
+template, but `kind` drives two small conditional differences: experience
+entries show a **Skills** heading instead of **Tech Stack**, and their
+`team` field is conventionally a location (`Chicago, IL`) rather than a
+list of project teammates. Numeric filename prefixes (`01-`, `02-`, ...)
+control display order within each section — renumber the surrounding
+files if you insert an entry out of order (e.g. a new job that's more
+recent than an existing one).
 
 Fill in the placeholders (title, dates, stack, overview, approach bullets,
 links), then rebuild:
@@ -162,34 +171,39 @@ links as visual preview cards, not plain text:
 
 To attach one: drop the file into
 `assets/documents/<projects|coursework|experience>/<slug>/`, point the
-entry's YAML `links:` at it (matching the exact filename — spaces and
-special characters in a real uploaded filename are fine, just make sure
-the `href` matches exactly), rebuild.
+entry's YAML `links:` at it with a path relative to the repo root (e.g.
+`assets/documents/experience/my-job/deck.pptx`) — matching the exact
+filename, since a mismatch fails silently as a 404 rather than a build
+error — rebuild.
+
+Detail pages live one directory below the repo root (`projects/<slug>.html`,
+etc.), so the `doc_card` Jinja macro (`templates/partials/doc_card.html`)
+prefixes every document href with `{{ depth }}` (`../`) at render time —
+the YAML `href` itself should never include that prefix.
 
 ## Site sections
 
 - **Home** (`index.html`) — hero with photo, About, embedded résumé viewer
 - **Education** (`education.html`) — static page, two degrees, hand-written
-- **Experience** (`experience.html` + `experience/*.html`) — 8 roles, card
-  grid → full detail page each
-- **Projects** (`projects.html` + `projects/*.html`) — 10 entries
+- **Experience** (`experience.html` + `experience/*.html`) — 9 roles, card
+  grid → full detail page each, ordered most-recent-first by end date
+- **Projects** (`projects.html` + `projects/*.html`) — 11 entries
 - **Coursework** (`coursework.html` + `coursework/*.html`) — 2 entries
 
-Nav order: Home / Education / Experience / Projects / Coursework.
+Nav order: Home / Experience / Education / Projects / Coursework.
 
 ## Status — what's real vs. still placeholder
 
 - ✅ Résumé (`assets/HARLEEN-BUTTAR.pdf`), embedded and working
 - ✅ Profile photo in the hero section
-- ✅ 8 of 11 projects have real GitHub repo links; 7 have real PDF/PPTX
-  document previews attached
-- ⬜ A few entries still have placeholder `href: '#'` links (live demos, a
-  couple of unconfirmed repos, and the portfolio site's own repo/live-site
-  links once pushed). Search `data/` for `href: '#'`.
-- ⬜ Footer contact info (`templates/partials/footer.html`) — email,
-  LinkedIn, and GitHub are still placeholder URLs as of this file; update
-  the `mailto:`, LinkedIn, and GitHub links there with your real ones if
-  you haven't already.
+- ✅ 10 of 11 projects have real GitHub repo links; 8 projects + 1
+  experience entry have real PDF/PPTX document previews attached
+- ✅ The portfolio site's own repo/live-site links are populated (see
+  `data/projects/portfolio-website.yaml`)
+- ✅ Footer contact info (`templates/partials/footer.html`) — real email,
+  LinkedIn, and GitHub links
+- ⬜ Two entries still have placeholder `href: '#'` links (a Gradio demo, one
+  unconfirmed GitHub repo). Search `data/` for `href: '#'`.
 
 ## Deploying
 
