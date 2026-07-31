@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UK Fruit & Vegetable Price Forecasting · Harleen Kaur Buttar</title>
+<title>Portfolio Strategy Optimization · Harleen Kaur Buttar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -34,29 +34,29 @@
 </header><main>
 <article class="detail">
   <a class="back-link" href="../projects.html">&larr; All Projects</a>
-  <p class="detail-tag">PROJECT 04</p>
-  <h1>UK Fruit &amp; Vegetable Price Forecasting</h1>
+  <p class="detail-tag">PROJECT 12</p>
+  <h1>Portfolio Strategy Optimization</h1>
   <div class="detail-meta">
-    <span>Team Project</span>
-    <span>Jan 2026 &ndash; Mar 2026</span>
-<span>with Danilo Ruberti, Minhao Zhang</span>  </div>
+    <span>Independent Project</span>
+    <span>2026</span>
+<span>Solo</span>  </div>
 <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
 </svg>  <section>
     <h2>Overview</h2>
-    <p>A weekly wholesale price forecasting project for UK vegetables, built on DEFRA's public weekly price series and an upstream agricultural material cost index used as an exogenous cost driver. The dataset spans 2015-01-09 to 2026-02-16 with 9&ndash;13% missingness on selected commodities (holidays and reporting-cycle changes) across 59 commodities, of which 4 were selected for full modeling: Bulb Onions, Cabbage, Carrots, and Lettuce.</p>
+    <p>This project asks whether optimization algorithm choice matters for systematic trading strategy selection under operational constraints: does an exact discrete optimizer produce a better, more reproducible selection than a black-box search or a simple greedy rule &mdash; and does a better in-sample selection actually translate into better out-of-sample performance? Three strategies (EMA crossover trend following, Bollinger Band mean reversion, and cross-sectional momentum ranking) run across five instruments &mdash; SPY, QQQ, BTC-USD, XOM, and GLD, sourced from Yahoo Finance since 2013 &mdash; under a constraint of at most K=3 funded strategy-asset pairs from 15 candidates, with no more than one strategy per asset.</p>
   </section>
   <section>
     <h2>Approach</h2>
-    <ul class="approach-list"><li>Engineered a causal weekly feature panel from raw multi-year price histories &mdash; lag features, rolling statistics, year-over-year deltas, and the exogenous cost-index series &mdash; using forward-fill for missing weeks to avoid data leakage.</li><li>Benchmarked interpretable statistical models (SARIMA, ARIMAX) against deep sequence models (S-Mamba, TimeGPT) on the last 52 weeks of each series, scored by sMAPE for its scale-independence and robustness to the volatility and shock spikes characteristic of produce pricing.</li><li>Selected different winning models per commodity rather than forcing one model across the board: S-Mamba won on Bulb Onions (6.72% sMAPE), Carrots (4.77%), and Lettuce (3.32%), while SARIMA won on Cabbage (4.60%) &mdash; evidence that model choice should be commodity-specific rather than uniform.</li><li>Scoped the result honestly: flagged missing data, retailer/frequency mismatches between the price series and the monthly/quarterly cost indices, and limited commodity coverage as real constraints, and proposed weather and import-volume data as next steps for extending coverage.</li></ul>
+    <ul class="approach-list"><li>Formulated strategy-asset selection as an exact mixed-integer program in OR-Tools CP-SAT, then benchmarked it against Bayesian search and a deterministic greedy ranking rule across 18 rolling rebalances.</li><li>Sized the selected strategy-asset pairs via convex portfolio optimization in CVXPY, solved with OSQP, CLARABEL, and SCS.</li><li>Found that CP-SAT never lost the training-window selection objective to either alternative across all 18 rebalances &mdash; but greedy tied it exactly in 18/18, showing the problem structure favored a simple heuristic despite the exact solver's theoretical edge.</li><li>Reported the honest headline finding over the flattering one: despite CP-SAT's in-sample dominance, none of the three optimized methods beat a naive equal-weight benchmark out-of-sample on Sharpe, CAGR, or drawdown.</li><li>Packaged the pipeline to emit a deployable "decision ticket" &mdash; the latest strategy selection and sizing &mdash; as actionable output for a portfolio manager deciding which strategies to activate.</li></ul>
   </section>
   <section>
     <h2>Tech Stack</h2>
-    <div class="detail-stack"><span>Python</span><span>R</span><span>ARIMA</span><span>SARIMA/ARIMAX</span><span>VAR/VARMA</span><span>Holt-Winters</span><span>DeepAR</span><span>Mamba</span></div>
+    <div class="detail-stack"><span>Python</span><span>OR-Tools CP-SAT</span><span>CVXPY</span><span>Bayesian Optimization</span><span>NumPy</span><span>Pandas</span></div>
   </section>
   <section>
     <h2>Links &amp; Documents</h2>
-    <div class="doc-grid"><a class="doc-card" href="assets/documents/projects/uk-produce-forecasting/UK-Vegetable-Price-Prediction.pptx" target="_blank" rel="noopener">
+    <div class="doc-grid"><a class="doc-card" href="assets/documents/projects/portfolio-strategy-optimization/Strategy-Selection-Optimization.pptx" target="_blank" rel="noopener">
   <div class="doc-thumb doc-thumb-pptx"><span class="doc-glyph"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <rect x="3" y="4" width="18" height="13" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
 <path d="M7 20h10M12 17v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -64,7 +64,7 @@
 </svg></span></div>
   <div class="doc-meta"><span class="doc-label">Presentation deck (PPTX)</span><span class="doc-badge">PPTX</span></div>
 </a></div>
-    <ul class="links-list"><li><a href="https://github.com/Minhao-Zhang/ADSP_31006_Final_Project" target="_blank" rel="noopener">GitHub repository &rarr;</a></li></ul>
+    <ul class="links-list"><li><a href="https://github.com/hkbuttar/portfolio-strategy-optimization" target="_blank" rel="noopener">GitHub repository &rarr;</a></li></ul>
   </section>
 </article>
 </main>

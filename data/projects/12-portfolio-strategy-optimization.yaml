@@ -1,0 +1,33 @@
+slug: portfolio-strategy-optimization
+tag: PROJECT 12
+title: Portfolio Strategy Optimization
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Tests whether exact discrete optimization beats Bayesian search or greedy ranking for selecting trading strategies &mdash; and whether a better in-sample pick actually wins out-of-sample.
+stack:
+- Python
+- OR-Tools CP-SAT
+- CVXPY
+- Bayesian Optimization
+- NumPy
+- Pandas
+overview: |-
+  This project asks whether optimization algorithm choice matters for systematic trading strategy selection under operational constraints: does an exact discrete optimizer produce a better, more reproducible selection than a black-box search or a simple greedy rule &mdash; and does a better in-sample selection actually translate into better out-of-sample performance? Three strategies (EMA crossover trend following, Bollinger Band mean reversion, and cross-sectional momentum ranking) run across five instruments &mdash; SPY, QQQ, BTC-USD, XOM, and GLD, sourced from Yahoo Finance since 2013 &mdash; under a constraint of at most K=3 funded strategy-asset pairs from 15 candidates, with no more than one strategy per asset.
+approach:
+- |-
+  Formulated strategy-asset selection as an exact mixed-integer program in OR-Tools CP-SAT, then benchmarked it against Bayesian search and a deterministic greedy ranking rule across 18 rolling rebalances.
+- |-
+  Sized the selected strategy-asset pairs via convex portfolio optimization in CVXPY, solved with OSQP, CLARABEL, and SCS.
+- |-
+  Found that CP-SAT never lost the training-window selection objective to either alternative across all 18 rebalances &mdash; but greedy tied it exactly in 18/18, showing the problem structure favored a simple heuristic despite the exact solver's theoretical edge.
+- |-
+  Reported the honest headline finding over the flattering one: despite CP-SAT's in-sample dominance, none of the three optimized methods beat a naive equal-weight benchmark out-of-sample on Sharpe, CAGR, or drawdown.
+- |-
+  Packaged the pipeline to emit a deployable "decision ticket" &mdash; the latest strategy selection and sizing &mdash; as actionable output for a portfolio manager deciding which strategies to activate.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/portfolio-strategy-optimization
+- label: Presentation deck (PPTX)
+  href: assets/documents/projects/portfolio-strategy-optimization/Strategy-Selection-Optimization.pptx

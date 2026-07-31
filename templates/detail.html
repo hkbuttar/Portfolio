@@ -21,7 +21,7 @@
     <ul class="approach-list">{% for step in item.approach %}<li>{{ step }}</li>{% endfor %}</ul>
   </section>
   <section>
-    <h2>Tech Stack</h2>
+    <h2>{% if kind == "experience" %}Skills{% else %}Tech Stack{% endif %}</h2>
     <div class="detail-stack">{% for s in item.stack %}<span>{{ s }}</span>{% endfor %}</div>
   </section>
   <section>
