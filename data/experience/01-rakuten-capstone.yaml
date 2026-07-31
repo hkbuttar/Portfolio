@@ -29,6 +29,6 @@ approach:
   Built a Vite + React PWA dashboard for non-technical stakeholders with multi-model comparison charts, confidence bands, residual plots, metric toggles, and CSV/PNG export, backed by a FastAPI service with GZip compression, and authored the methodology/conclusion sections and metrics slide for the final deliverables.
 links:
 - label: Capstone paper (PDF)
-  href: assets/documents/experience/rakuten-capstone/capstone-paper.pdf
+  href: assets/documents/experience/rakuten-capstone/Capstone-Paper.pdf
 - label: Presentation deck (PPTX)
   href: assets/documents/experience/rakuten-capstone/Rakuten-Presentation.pptx
