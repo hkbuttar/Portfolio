@@ -1,0 +1,34 @@
+slug: rakuten-capstone
+tag: EXPERIENCE 01
+title: Data Science Capstone Consultant
+org: Rakuten Advertising &middot; University of Chicago
+dates: Jan 2026 &ndash; Aug 2026
+team: Chicago, IL
+short: |-
+  Benchmarked time-series foundation models against PEFT fine-tuning for affiliate-revenue forecasting &mdash; zero-shot Chronos won every vertical, cutting forecast error 42%.
+stack:
+- Python
+- FastAPI
+- Vite
+- React
+- Recharts
+- LightGBM
+- XGBoost
+- Chronos
+- TimesFM
+overview: |-
+  Capstone engagement with Rakuten Advertising, replacing manual, client-by-client affiliate revenue forecasting (roughly 400 forecasts/month at 6 hours each, an estimated $2.16M/year in labor) with a standardized, vertical-aware pipeline. Compared classical statistical models, gradient-boosted trees, time-series foundation models, and parameter-efficient fine-tuning of those foundation models on 1.66M rows of NIQ consumer receipt data spanning Luxury Brand Retail, Luxury Department Retail, and Travel.
+approach:
+- |-
+  Benchmarked SARIMA/SARIMAX, VAR, GARCH, and ETS against XGBoost and LightGBM, then against time-series foundation models &mdash; TimesFM, Chronos, Tiny Time Mixers, MOMENT, and Moirai &mdash; scored on nine metrics (WAPE and MdAPE as primary) across 71 total model configurations per vertical.
+- |-
+  Fine-tuned the foundation models per vertical with seven PEFT methods (LoRA, QLoRA, DoRA, BitFit, P-Tuning, Prompt Tuning, Prefix Tuning) to test whether vertical-specific adaptation could beat zero-shot forecasting.
+- |-
+  Found that zero-shot, covariate-aware Chronos won all three verticals outright &mdash; 42% lower WAPE than the strongest traditional baseline &mdash; while fine-tuning underperformed: 83% of 168 fine-tuned runs scored worse than their own base model, and none beat zero-shot Chronos. Reported this honestly as the headline finding rather than the PEFT result the project set out to showcase.
+- |-
+  Built a Vite + React PWA dashboard for non-technical stakeholders with multi-model comparison charts, confidence bands, residual plots, metric toggles, and CSV/PNG export, backed by a FastAPI service with GZip compression, and authored the methodology/conclusion sections and metrics slide for the final deliverables.
+links:
+- label: Capstone paper (PDF)
+  href: assets/documents/experience/rakuten-capstone/capstone-paper.pdf
+- label: Presentation deck (PPTX)
+  href: assets/documents/experience/rakuten-capstone/Rakuten-Presentation.pptx

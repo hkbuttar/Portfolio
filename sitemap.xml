@@ -5,7 +5,6 @@
   <url><loc>https://example.com/coursework.html</loc></url>
   <url><loc>https://example.com/experience.html</loc></url>
   <url><loc>https://example.com/education.html</loc></url>
-  <url><loc>https://example.com/projects/rakuten-capstone.html</loc></url>
   <url><loc>https://example.com/projects/qlora-recipe-chef.html</loc></url>
   <url><loc>https://example.com/projects/clothing-fit-prediction.html</loc></url>
   <url><loc>https://example.com/projects/uk-produce-forecasting.html</loc></url>
@@ -19,6 +18,7 @@
   <url><loc>https://example.com/projects/portfolio-strategy-optimization.html</loc></url>
   <url><loc>https://example.com/coursework/advanced-ml-ai.html</loc></url>
   <url><loc>https://example.com/coursework/applied-genai-homework.html</loc></url>
+  <url><loc>https://example.com/experience/rakuten-capstone.html</loc></url>
   <url><loc>https://example.com/experience/teaching-assistant.html</loc></url>
   <url><loc>https://example.com/experience/charactour.html</loc></url>
   <url><loc>https://example.com/experience/internet-equity-initiative.html</loc></url>
