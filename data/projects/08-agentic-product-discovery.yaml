@@ -1,30 +1,34 @@
 slug: agentic-product-discovery
 tag: PROJECT 08
 title: Voice-to-Voice Agentic Product Discovery Assistant
-org: Team Project &mdash; In Progress
-dates: 2026 &mdash; in progress
-team: Team project
+org: Team Project
+dates: Jul 2026
+team: with Aren Mizuno
 short: |-
-  An in-progress voice-to-voice shopping assistant (LangGraph + MCP + faster-whisper + Azure TTS). This repo covers the data ingestion and retrieval layer built so far.
+  A finished voice-to-voice, multi-agent shopping assistant (LangGraph + MCP + faster-whisper + Azure TTS) that grounds recommendations in a private catalog and live web data &mdash; SILVER-certified on an adversarial safety eval.
 stack:
 - Python
-- ChromaDB
-- sentence-transformers
 - LangGraph
 - MCP
+- Claude API
+- FastAPI
+- React
+- ChromaDB
 - faster-whisper
 - Azure TTS
 overview: |-
-  A voice-to-voice agentic product discovery assistant combining a LangGraph agent, MCP tool integration, faster-whisper transcription, and Azure TTS with a React/FastAPI frontend. This repository currently covers the data ingestion and retrieval layer; the conversational agent and voice pipeline are still in progress.
+  A voice-to-voice, multi-agent e-commerce assistant that understands spoken product requests, plans a retrieval strategy, pulls grounded and cited evidence from a private product catalog (with optional live web reconciliation), and responds via speech with on-screen citations. A LangGraph state graph (Router &rarr; Planner &rarr; Retriever &rarr; Answerer/Critic) orchestrates two MCP tools &mdash; a Chroma-backed <code>rag.search</code> over the full Amazon Product Dataset 2020 (10,002 products) and a domain-allowlisted <code>web.search</code> &mdash; behind a FastAPI backend and React frontend, with faster-whisper transcription and Azure TTS synthesis closing the voice loop.
 approach:
 - |-
-  Built a Kaggle-sourced ingestion pipeline (download &rarr; schema inspection &rarr; cleaning &rarr; embedding &rarr; indexing) turning the Amazon Product Dataset 2020 into a persistent Chroma vector index for a downstream <code>rag.search</code> MCP tool.
+  Built a Kaggle-sourced ingestion pipeline (download &rarr; schema inspection &rarr; cleaning &rarr; embedding &rarr; indexing) turning the full Amazon Product Dataset 2020 &mdash; 10,002 products across every category &mdash; into a persistent Chroma vector index, with category stored as filterable metadata rather than pre-filtered at ingestion, and diagnosed real data-quality issues (empty brand/ingredient fields, no ratings column, ~4% malformed price strings) with a dedicated parser rather than silently ingesting noisy data.
 - |-
-  Diagnosed and documented real data-quality issues in the source data &mdash; entirely empty brand and ingredient fields, no ratings column, and roughly 4% malformed price strings &mdash; building a <code>$</code>-anchored price parser and stripping recurring product-description boilerplate rather than silently ingesting noisy data.
+  Built an MCP server exposing <code>rag.search</code> and <code>web.search</code> (Serper.dev Shopping with a domain-allowlisted, <code>robots.txt</code>-respecting organic-search fallback) as the only interface the agent graph is allowed to call through &mdash; with response caching, rate limiting, and full request/response logging.
 - |-
-  Embedded product text (title, features, ingredients) locally with all-MiniLM-L6-v2 and indexed 708 products under a category slice with filterable metadata for downstream agent queries.
+  Implemented the LangGraph Router &rarr; Planner &rarr; Retriever &rarr; Answerer/Critic flow on the Claude API through a swappable provider abstraction, with a relevance-judgment call gating whether the private catalog genuinely satisfies a query before falling back to live search, and follow-up queries ("the cheapest one") resolved against conversation history instead of re-querying from scratch.
 - |-
-  Scoped the retriever's public interface (<code>RagRetriever.search</code>) as a thin, swappable contract so the MCP layer, LangGraph agent, and voice pipeline can be built out independently on top of it.
+  Closed the voice loop end to end &mdash; faster-whisper transcription in, Azure TTS synthesis out &mdash; behind a FastAPI backend and a React frontend with mic capture, a live transcript, an agent step log, a comparison table, and citations.
+- |-
+  Ran two evals against the real, live agent graph rather than mocks: a 10-case golden query set that caught and fixed a real bug (rejected private-catalog hits were leaking into the Answerer's evidence after being judged irrelevant), reaching 10/10 passing after the fix; and an adversarial <code>proofagent-harness</code> eval that caught a second real bug (an unhandled Serper API error crashing the whole agent turn) and, after fixing it, scored 83% task success, 94% hallucination resistance, 100% instruction following, and 100% manipulation resistance and safety &mdash; earning a SILVER certification.
 links:
 - label: GitHub repository
   href: https://github.com/hkbuttar/Agentic_Final
