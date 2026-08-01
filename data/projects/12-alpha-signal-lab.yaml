@@ -31,7 +31,9 @@ approach:
 - |-
   Layered in a risk overlay &mdash; volatility-targeted position sizing, gross/name/sector exposure limits, historical and parametric VaR, and a hard drawdown kill-switch &mdash; and reported the result honestly: the kill-switch tripped on 2020-12-10 at a 15.1% drawdown and never re-armed, leaving the book flat for the rest of the backtest window.
 - |-
-  Shipped two dashboards (React/Vercel and Streamlit) reading from a shared Postgres store, plus a FastAPI backend, so live paper P&L can be reconciled against backtest expectations for the same period.
+  Took the live paper-trading loop from unit-tested-but-never-run to actually operating: a daily scheduled GitHub Actions job now trades against a funded Alpaca paper account and logs every order, fill, and portfolio snapshot to Postgres.
+- |-
+  Shipped two dashboards (React/Vercel and Streamlit Community Cloud) reading from that same Postgres store, plus a FastAPI backend, plotting live and backtested equity curves indexed to % return so a paper account and a backtest of a different notional size are directly comparable.
 links:
 - label: GitHub repository
   href: https://github.com/hkbuttar/alpha-signal-lab
