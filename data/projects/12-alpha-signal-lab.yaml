@@ -1,0 +1,41 @@
+slug: alpha-signal-lab
+tag: PROJECT 12
+title: Alpha Signal Lab
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Event-driven factor research and paper-trading platform for systematic equities, combining momentum, mean-reversion, volatility, and LLM-scored news sentiment into a composite signal with realistic costs and risk controls.
+stack:
+- Python
+- Pandas
+- NumPy
+- SciPy
+- GPT-4o-mini
+- Alpaca API
+- FastAPI
+- React
+- Recharts
+- Streamlit
+- Postgres
+- GitHub Actions
+overview: |-
+  A factor-based signal research pipeline, event-driven backtesting engine, and live paper-trading system for systematic equity strategies, built end-to-end from research to production: signal construction, walk-forward validation, risk-controlled execution, and live monitoring. Most academic backtests overstate performance by ignoring execution realism and letting look-ahead bias creep in through vectorized computation, so this engine steps through time event by event, only ever seeing information that would have been available at that point. It also folds in a non-price signal &mdash; LLM-scored news sentiment &mdash; to test whether unstructured text data adds information beyond what's already in price and volume, across a 49-name universe of large-cap US equities spanning Technology, Healthcare, Financials, and Energy.
+approach:
+- |-
+  Built four independently testable factors &mdash; 12-1 month momentum, short-horizon mean-reversion, low-volatility, and GPT-4o-mini-scored news sentiment &mdash; each evaluated on Information Coefficient, IC decay, and turnover before combination.
+- |-
+  Combined factors into a single composite score using trailing-IC-derived weights, refit monthly from only the preceding 126 trading days of data, then held constant out-of-sample until the next refit to keep the walk-forward validation honest.
+- |-
+  Built the backtest as an event-driven simulator rather than a vectorized one, filling orders at next-day open with modeled transaction costs (5 bps) and ADV-participation-scaled slippage, to avoid the look-ahead bias vectorized backtests can silently introduce.
+- |-
+  Layered in a risk overlay &mdash; volatility-targeted position sizing, gross/name/sector exposure limits, historical and parametric VaR, and a hard drawdown kill-switch &mdash; and reported the result honestly: the kill-switch tripped on 2020-12-10 at a 15.1% drawdown and never re-armed, leaving the book flat for the rest of the backtest window.
+- |-
+  Shipped two dashboards (React/Vercel and Streamlit) reading from a shared Postgres store, plus a FastAPI backend, so live paper P&L can be reconciled against backtest expectations for the same period.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/alpha-signal-lab
+- label: React dashboard
+  href: https://alpha-signal-lab.vercel.app/
+- label: Streamlit dashboard
+  href: https://alpha-signal-lab.streamlit.app/
