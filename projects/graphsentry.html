@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GraphSentry · Harleen Kaur Buttar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script src="../doc-viewer.js" defer></script>
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <svg class="mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" />
+        <path d="M13 12v16M13 20h6.5M27 12v16" />
+      </svg>
+      <span>Harleen Kaur Buttar</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../education.html">Education</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../coursework.html">Coursework</a></li>
+      </ul>
+      <a class="resume-btn" href="../index.html#resume">View Résumé</a>
+    </nav>
+  </div>
+</header><main>
+<article class="detail">
+  <a class="back-link" href="../projects.html">&larr; All Projects</a>
+  <p class="detail-tag">PROJECT 13</p>
+  <h1>GraphSentry</h1>
+  <div class="detail-meta">
+    <span>Independent Project</span>
+    <span>2026</span>
+<span>Solo</span>  </div>
+<svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+</svg>  <section>
+    <h2>Overview</h2>
+    <p>Anti-money-laundering in crypto is fundamentally a graph problem: a transaction's risk depends on who it's connected to, not just its own attributes. This project asks two questions and answers both honestly rather than toward a hoped-for result: how far do classical, interpretable graph statistics (PageRank, centrality, community structure) get on their own, and does a graph neural network add meaningfully more once those statistics are already available to a strong feature-based baseline. Built on the Elliptic Data Set &mdash; 203,769 Bitcoin transaction nodes, 234,355 directed edges, 49 discrete time steps with zero edges crossing time-step boundaries &mdash; with a temporal train/test split (steps 1&ndash;34 train, 35&ndash;49 test) chosen to mirror real deployment rather than an easier random shuffle.</p>
+  </section>
+  <section>
+    <h2>Approach</h2>
+    <ul class="approach-list"><li>Built a directed transaction graph in NetworkX and computed classical graph analytics &mdash; PageRank, in/out-degree, clustering coefficient, largest-component betweenness, and Louvain community detection &mdash; then verified a real finding directly: communities with more than double the baseline illicit rate contain 45.4% of all illicit nodes while making up just 13.4% of the graph.</li><li>Ran a Kolmogorov-Smirnov drift audit comparing every feature's train vs. test distribution and found 6 features with near-total separation (KS &gt; 0.9); dropping them nearly doubled the XGBoost baseline's precision (0.537 &rarr; 0.953) and raised F1 from 0.628 to 0.817 &mdash; the single most decisive change in the project, arrived at by diagnosis rather than by tuning around the symptom.</li><li>Built a directed-message-passing GraphSAGE GNN (inductive by construction, since every test-period node's neighborhood is structurally guaranteed to be unseen at train time) to challenge the XGBoost baseline on identical data splits and evaluation logic.</li><li>Reported the honest result: GraphSAGE underperformed XGBoost on every metric (F1 0.659 vs. 0.817, PR-AUC 0.631 vs. 0.804), after a genuine tuning effort &mdash; diagnosing the validation/test gap epoch-by-epoch, sweeping four configurations, and testing two competing hypotheses for the shortfall rather than assuming the first explanation.</li><li>Shipped a FastAPI backend serving cached graph/model artifacts (never recomputing analytics or retraining per request) behind a SvelteKit + D3 dashboard for interactive network exploration, node lookup, and live model comparison, deployed to Render and Vercel with the full data-and-training pipeline reproducible on every backend deploy.</li></ul>
+  </section>
+  <section>
+    <h2>Tech Stack</h2>
+    <div class="detail-stack"><span>Python</span><span>NetworkX</span><span>python-louvain</span><span>XGBoost</span><span>PyTorch Geometric</span><span>FastAPI</span><span>SvelteKit</span><span>D3.js</span></div>
+  </section>
+  <section>
+    <h2>Links &amp; Documents</h2>
+    <ul class="links-list"><li><a href="https://github.com/hkbuttar/graphsentry" target="_blank" rel="noopener">GitHub repository &rarr;</a></li><li><a href="https://graphsentry.vercel.app/" target="_blank" rel="noopener">Live demo &rarr;</a></li></ul>
+  </section>
+</article>
+</main>
+<footer class="site-footer">
+  <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+  </svg>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-name">Harleen Kaur Buttar</p>
+      <p class="footer-tag">Data Scientist &amp; Visual Artist &mdash; Chicago, IL</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:hkbuttar@uchicago.edu">Email</a>
+      <a href="https://linkedin.com/in/hkbuttar" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hkbuttar" target="_blank" rel="noopener">GitHub</a>
+      <a href="../index.html#resume">R&eacute;sum&eacute;</a>
+    </div>
+  </div>
+  <p class="footer-note">&copy; 2026 Harleen Kaur Buttar. Built by hand, no frameworks.</p>
+</footer></body>
+</html>

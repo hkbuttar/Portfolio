@@ -1,0 +1,35 @@
+slug: graphsentry
+tag: PROJECT 13
+title: GraphSentry
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Fraud detection on the Elliptic Bitcoin transaction network, combining classical graph analytics with a GraphSAGE GNN benchmarked head-to-head against XGBoost &mdash; and reporting honestly that the GNN loses.
+stack:
+- Python
+- NetworkX
+- python-louvain
+- XGBoost
+- PyTorch Geometric
+- FastAPI
+- SvelteKit
+- D3.js
+overview: |-
+  Anti-money-laundering in crypto is fundamentally a graph problem: a transaction's risk depends on who it's connected to, not just its own attributes. This project asks two questions and answers both honestly rather than toward a hoped-for result: how far do classical, interpretable graph statistics (PageRank, centrality, community structure) get on their own, and does a graph neural network add meaningfully more once those statistics are already available to a strong feature-based baseline. Built on the Elliptic Data Set &mdash; 203,769 Bitcoin transaction nodes, 234,355 directed edges, 49 discrete time steps with zero edges crossing time-step boundaries &mdash; with a temporal train/test split (steps 1&ndash;34 train, 35&ndash;49 test) chosen to mirror real deployment rather than an easier random shuffle.
+approach:
+- |-
+  Built a directed transaction graph in NetworkX and computed classical graph analytics &mdash; PageRank, in/out-degree, clustering coefficient, largest-component betweenness, and Louvain community detection &mdash; then verified a real finding directly: communities with more than double the baseline illicit rate contain 45.4% of all illicit nodes while making up just 13.4% of the graph.
+- |-
+  Ran a Kolmogorov-Smirnov drift audit comparing every feature's train vs. test distribution and found 6 features with near-total separation (KS &gt; 0.9); dropping them nearly doubled the XGBoost baseline's precision (0.537 &rarr; 0.953) and raised F1 from 0.628 to 0.817 &mdash; the single most decisive change in the project, arrived at by diagnosis rather than by tuning around the symptom.
+- |-
+  Built a directed-message-passing GraphSAGE GNN (inductive by construction, since every test-period node's neighborhood is structurally guaranteed to be unseen at train time) to challenge the XGBoost baseline on identical data splits and evaluation logic.
+- |-
+  Reported the honest result: GraphSAGE underperformed XGBoost on every metric (F1 0.659 vs. 0.817, PR-AUC 0.631 vs. 0.804), after a genuine tuning effort &mdash; diagnosing the validation/test gap epoch-by-epoch, sweeping four configurations, and testing two competing hypotheses for the shortfall rather than assuming the first explanation.
+- |-
+  Shipped a FastAPI backend serving cached graph/model artifacts (never recomputing analytics or retraining per request) behind a SvelteKit + D3 dashboard for interactive network exploration, node lookup, and live model comparison, deployed to Render and Vercel with the full data-and-training pipeline reproducible on every backend deploy.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/graphsentry
+- label: Live demo
+  href: https://graphsentry.vercel.app/
