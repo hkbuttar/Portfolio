@@ -1,0 +1,36 @@
+slug: terra-risk
+tag: PROJECT 14
+title: Terra Risk
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Geospatial risk/opportunity mapping for Chicago census tracts, combining FEMA flood zones, recency-weighted crime rates, and walk-network amenity isochrones into one composite score, validated with spatial statistics rather than trusted on sight.
+stack:
+- Python
+- GeoPandas
+- Shapely
+- OSMnx
+- libpysal / esda
+- FastAPI
+- React
+- deck.gl
+- MapLibre GL
+overview: |-
+  Neighborhood-level investment decisions usually draw on flood risk, crime, and amenity access as separate, disconnected lookups. This project pulls all three into one composite risk/opportunity score per census tract across 782 tracts in the City of Chicago, while keeping the underlying sub-scores visible rather than collapsing everything into one opaque number. Flood severity comes from a cleaned, dissolved FEMA NFHL layer; crime from a recency-weighted, per-capita rate on City of Chicago incident data; amenity access from 15-minute walk isochrones computed on the real street network via Dijkstra's algorithm, not a circle or convex hull. Every modeling choice &mdash; equal component weights, a 7-tier flood severity scheme, a 180-day crime recency half-life &mdash; is disclosed as a judgment call and then stress-tested, not asserted as neutral.
+approach:
+- |-
+  Built a real geospatial pipeline in GeoPandas: reprojected every layer to a local UTM CRS, scoped 782 tracts to Chicago's true boundary (catching a DuPage County sliver from the O'Hare annexation by checking overlap against all of Illinois rather than assuming Cook County was sufficient), dissolved 24,626 raw FEMA flood polygons into 16 categories, and computed true polygon-polygon tract/flood overlays rather than simple containment checks.
+- |-
+  Validated the composite score against two independent signals it was never fit to &mdash; ACS median home value and rent &mdash; reporting Pearson and Spearman correlations with a Benjamini-Hochberg FDR correction across all 8 tests, and disclosing a counterintuitive finding as-found: flood-exposed tracts trend toward slightly <em>higher</em> home values, most likely because Chicago's priciest real estate clusters near the water where flood zones also concentrate.
+- |-
+  Ran four separate sensitivity analyses (component weighting, flood severity scheme, crime recency half-life, and per-tract weight robustness) rather than presenting one weighting as ground truth &mdash; and reported the nuance when a "stable" result turned out to be a ranking artifact of heavy ties in two zero-inflated inputs concentrating differentiation almost entirely into the crime component.
+- |-
+  Applied Global and Local Moran's I (via libpysal/esda) to test whether the composite score clusters geographically rather than scattering tract-by-tract, catching and correcting a degenerate island case (a tract with exactly one neighbor, itself excluded from a different subset) before it could pass through as a false "cluster" result.
+- |-
+  Shipped a FastAPI backend serving precomputed GeoJSON/CSV outputs (no live geocomputation per request) behind a React + deck.gl + MapLibre map with choropleth, cluster, outlier, and weight-robustness layers, a click-to-inspect tract panel, and a sortable leaderboard &mdash; and fixed a real production incident along the way: an unsimplified 13.5M-vertex flood layer causing a 552MB payload and 38s response time, solved with offline geometry simplification plus response caching and gzip, cutting the payload to ~5MB.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/terra-risk
+- label: Live demo
+  href: https://terra-risk.vercel.app/
