@@ -1,0 +1,34 @@
+slug: streamalpha
+tag: PROJECT 15
+title: StreamAlpha
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Real-time market anomaly detection via Kafka &mdash; online volume-spike and volatility-regime models with an exactly-once processing story, chaos-tested against real infrastructure, extending Alpha Signal Lab's batch pipeline with true event streaming.
+stack:
+- Python
+- Kafka
+- confluent-kafka
+- PostgreSQL
+- FastAPI
+- React
+- Docker Compose
+overview: |-
+  Alpha Signal Lab is a daily-batch factor pipeline: it can't see anything that happens within a day, since by the time the next batch run picks up the data, the moment that mattered is gone. StreamAlpha asks a narrower question against the same equity universe: can genuinely real-time, tick-by-tick data support anomaly detection that updates online, one event at a time, with no batch window to fall back on? That constraint changes the engineering as much as the modeling &mdash; ingestion has to survive a dropped WebSocket, a consumer has to survive a crash without losing or duplicating a tick, and the ML models have to update incrementally rather than retrain from a stable window. Two from-scratch online detectors (a rolling z-score volume-spike model and Bayesian online changepoint detection for volatility regime shifts) run per ticker against live Alpaca trade data, with exactly-once delivery treated as three independently-verified design legs rather than a single setting.
+approach:
+- |-
+  Built exactly-once processing as three separate, verified legs &mdash; an idempotent producer, manual offset commits with dead-letter-queue routing for malformed payloads, and an idempotent Postgres upsert sink &mdash; then proved the guarantee under a real crash with a chaos "kill test": SIGKILL landed deterministically inside the commit-vs-durable-write race window, confirming zero ticks lost and zero duplicate rows despite confirmed real Kafka redelivery.
+- |-
+  Iterated an online volume-spike detector from a streaming isolation forest (river's HalfSpaceTrees, unusable recall on an isolated spike) through several failed feature-engineering attempts to a simple rolling z-score on volume &mdash; the simpler model won, catching 50/50 seeded synthetic spikes at ~0.04 false positives per 500 quiet windows, and the isolation-forest dependency was dropped from the project entirely.
+- |-
+  Implemented Bayesian online changepoint detection from scratch for volatility regime shifts (no library implementation existed for this project's needs), catching and fixing two real bugs along the way: the obvious changepoint signal turned out to be mathematically constant, and the prior's implicit scale needed a log-transform of volatility to detect a real regime shift at all.
+- |-
+  Ran chaos tests against real infrastructure, not simulated failures &mdash; a synthetic 8,000-message burst measuring consumer lag and recovery, a deterministic kill-mid-write test, and a real network-layer WebSocket block (pfctl) confirming reconnect/backoff actually fires &mdash; and let chaos testing surface a real bug outside its own scope: Kafka's log directory was never pointed at its mounted volume, so no topic had ever actually been durable across a container recreation.
+- |-
+  Shipped a read-only FastAPI backend (anomalies, pipeline health, a live tick WebSocket relay) behind a React dashboard, deployed to Render (backend plus three background Kafka workers) and Vercel, and cross-referenced StreamAlpha's own live-detected anomalies against Alpha Signal Lab's factor moves &mdash; reporting the real n=2 result plainly as too small to conclude anything from, rather than dressed up as a finding.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/streamalpha
+- label: Live demo
+  href: https://streamalpha.vercel.app/
