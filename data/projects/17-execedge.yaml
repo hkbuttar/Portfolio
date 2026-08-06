@@ -1,0 +1,34 @@
+slug: execedge
+tag: PROJECT 17
+title: ExecEdge
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Optimal execution algorithm backtester &mdash; TWAP, VWAP, Almgren-Chriss, and an RL policy, benchmarked with bootstrap confidence intervals entirely on real order book data from Binance, Coinbase, and Kraken, no synthetic data anywhere.
+stack:
+- Python
+- Gymnasium
+- Stable-Baselines3
+- FastAPI
+- Bokeh
+- PostgreSQL
+- Docker
+overview: |-
+  Every trading desk with meaningful size to move faces the same problem: how do you fill a large order without moving the market against yourself? This project builds and rigorously benchmarks the standard toolkit &mdash; TWAP, VWAP, Almgren-Chriss optimal execution, and a learned RL policy &mdash; entirely on real historical order book data from crypto exchanges (Binance.US, Coinbase, Kraken, all via public unauthenticated endpoints, no API keys required), with every modeling assumption disclosed rather than buried. Complements BookMaker's market-maker view with the order-executor's perspective, on a real reconstructed limit order book rather than a fill-probability approximation, and reports honestly where the available data is too thin to draw a confident conclusion rather than dressing up a small sample as a finished result.
+approach:
+- |-
+  Built venue-specific order book reconstruction from real Binance/Coinbase/Kraken diff and snapshot feeds &mdash; each exchange's gap-detection scheme is genuinely different &mdash; and found and fixed four real reconciliation bugs that only surfaced by running the reconstruction against a live feed, not by code review.
+- |-
+  Implemented TWAP, VWAP, and dual-calibrated Almgren-Chriss (both a literature square-root-law convention and an empirically fitted impact model, r&sup2;=0.89 against 1,435 real book-walk observations), then benchmarked all four against an RL policy on identical held-out episodes through one shared harness rather than separate scoring paths.
+- |-
+  Layered bootstrap confidence intervals and an explicit robust-vs-fragile heuristic onto every comparison, then reported the real, honest result of a small recording (~5 minutes of Binance history, n=9 windows): naive single-shot execution is the one row with a robust CI and it's the worst performer, while TWAP/VWAP/both AC calibrations land on statistically indistinguishable means &mdash; correctly read as data too thin to separate the algorithms, not as a finding that they're equivalent.
+- |-
+  Where a real published coefficient couldn't be verified (PDF extraction failures, bot-blocked fee pages), used an explicitly labeled placeholder instead of inventing a precise-looking number &mdash; and reported the literature-vs-empirical Almgren-Chriss divergence at just 25% given the actual data available, while naming the two caveats (a convention, not a fitted number; one 5-minute window) that keep it from being a validated result.
+- |-
+  Shipped a FastAPI backend and Bokeh frontend that reuse the exact same backtest/calibration functions as the CLI tools (nothing reimplemented for serving), deployed via Docker/Render with a managed Postgres for book-history persistence, and verified the full stack locally through real `docker compose` &mdash; backend serving real data, frontend's Bokeh server actually starting, a genuine `POST /backtest` returning a real result.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/execedge
+- label: Live demo
+  href: https://execedge-frontend.onrender.com/app
