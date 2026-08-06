@@ -1,0 +1,35 @@
+slug: bookmaker
+tag: PROJECT 16
+title: BookMaker
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Market-making simulator on a real price-time-priority limit order book, pitting hand-tuned inventory/adverse-selection strategies against a DQN policy under realistic latency modeling, then validated against real Binance order book data.
+stack:
+- Python
+- Gymnasium
+- Stable-Baselines3
+- SortedDict
+- FastAPI
+- SQLAlchemy
+- Bokeh
+- PostgreSQL
+overview: |-
+  Market making is a natural setting for comparing hand-tuned heuristics against learned policies: the reward signal (P&amp;L) is unambiguous and the decision is simple to express, while still being genuinely hard to do well &mdash; balancing captured spread against inventory risk and adverse selection under real latency between deciding on a quote and that quote landing in the book. This project builds the full stack needed to ask that comparison honestly: a real price-time-priority matching engine (not a fill-probability approximation), three hand-tuned strategies of increasing sophistication, a latency model separating decision time from arrival time, and a DQN policy trained and evaluated through the exact same execution path as the heuristics &mdash; so "RL vs. hand-tuned" is a fair fight, not an artifact of the two sides being tested differently. Findings are validated on real Binance order book data, not just the synthetic order flow the mechanism was built and tuned against.
+approach:
+- |-
+  Built a real matching engine (`SortedDict` bid/ask sides, FIFO queues per price level, true price-time priority) rather than a fill-probability model, with decision time and arrival time kept separate from the start so a latency model and RL/heuristic comparisons under delay are meaningful, not approximated after the fact.
+- |-
+  Implemented three hand-tuned strategies of increasing sophistication &mdash; naive fixed half-spread, inventory-aware reservation pricing, and adverse-selection-aware order-book-imbalance tracking &mdash; all routed through a shared risk layer (absolute-drawdown kill switch, inventory-limit clip).
+- |-
+  Trained a DQN policy in a Gymnasium environment wrapping the same matching engine and latency model, diagnosing and fixing a training collapse ("never quote") caused by a plain quadratic inventory penalty by introducing a Huber-style penalty with a curriculum ramp &mdash; and reported that the automated training-curve diagnostic itself both missed a real failure mode and false-flagged a working run, so every RL claim is backed by held-out evaluation, not training curves alone.
+- |-
+  Reported the honest, mixed result rather than a clean win: RL beat the hand-tuned baselines on the primary held-out comparison (53.5 mean fills / $11.85 mean P&amp;L vs. 24.3 / $2.63 across ten sessions), but the weaker RL variant failed outright (zero fills) on one specific headline session despite averaging respectably elsewhere &mdash; disclosed directly rather than swapped for a better-looking seed.
+- |-
+  Validated every synthetic-data finding against real Binance order book and trade data captured live via Binance's public feed, and reported the reversal plainly: all three hand-tuned strategies lose money on real BTC data because a half-spread calibrated for a ~$100 synthetic instrument provides no buffer at BTC's actual ~$64k scale &mdash; and strategy ranking flips entirely between synthetic and real data, with the most conservative strategy going from worst to best.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/bookmaker
+- label: Live demo
+  href: https://bookmaker-frontend-oeed.onrender.com/frontend

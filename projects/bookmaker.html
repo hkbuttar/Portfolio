@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BookMaker · Harleen Kaur Buttar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script src="../doc-viewer.js" defer></script>
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <svg class="mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" />
+        <path d="M13 12v16M13 20h6.5M27 12v16" />
+      </svg>
+      <span>Harleen Kaur Buttar</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../education.html">Education</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../coursework.html">Coursework</a></li>
+      </ul>
+      <a class="resume-btn" href="../index.html#resume">View Résumé</a>
+    </nav>
+  </div>
+</header><main>
+<article class="detail">
+  <a class="back-link" href="../projects.html">&larr; All Projects</a>
+  <p class="detail-tag">PROJECT 16</p>
+  <h1>BookMaker</h1>
+  <div class="detail-meta">
+    <span>Independent Project</span>
+    <span>2026</span>
+<span>Solo</span>  </div>
+<svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+</svg>  <section>
+    <h2>Overview</h2>
+    <p>Market making is a natural setting for comparing hand-tuned heuristics against learned policies: the reward signal (P&amp;L) is unambiguous and the decision is simple to express, while still being genuinely hard to do well &mdash; balancing captured spread against inventory risk and adverse selection under real latency between deciding on a quote and that quote landing in the book. This project builds the full stack needed to ask that comparison honestly: a real price-time-priority matching engine (not a fill-probability approximation), three hand-tuned strategies of increasing sophistication, a latency model separating decision time from arrival time, and a DQN policy trained and evaluated through the exact same execution path as the heuristics &mdash; so "RL vs. hand-tuned" is a fair fight, not an artifact of the two sides being tested differently. Findings are validated on real Binance order book data, not just the synthetic order flow the mechanism was built and tuned against.</p>
+  </section>
+  <section>
+    <h2>Approach</h2>
+    <ul class="approach-list"><li>Built a real matching engine (`SortedDict` bid/ask sides, FIFO queues per price level, true price-time priority) rather than a fill-probability model, with decision time and arrival time kept separate from the start so a latency model and RL/heuristic comparisons under delay are meaningful, not approximated after the fact.</li><li>Implemented three hand-tuned strategies of increasing sophistication &mdash; naive fixed half-spread, inventory-aware reservation pricing, and adverse-selection-aware order-book-imbalance tracking &mdash; all routed through a shared risk layer (absolute-drawdown kill switch, inventory-limit clip).</li><li>Trained a DQN policy in a Gymnasium environment wrapping the same matching engine and latency model, diagnosing and fixing a training collapse ("never quote") caused by a plain quadratic inventory penalty by introducing a Huber-style penalty with a curriculum ramp &mdash; and reported that the automated training-curve diagnostic itself both missed a real failure mode and false-flagged a working run, so every RL claim is backed by held-out evaluation, not training curves alone.</li><li>Reported the honest, mixed result rather than a clean win: RL beat the hand-tuned baselines on the primary held-out comparison (53.5 mean fills / $11.85 mean P&amp;L vs. 24.3 / $2.63 across ten sessions), but the weaker RL variant failed outright (zero fills) on one specific headline session despite averaging respectably elsewhere &mdash; disclosed directly rather than swapped for a better-looking seed.</li><li>Validated every synthetic-data finding against real Binance order book and trade data captured live via Binance's public feed, and reported the reversal plainly: all three hand-tuned strategies lose money on real BTC data because a half-spread calibrated for a ~$100 synthetic instrument provides no buffer at BTC's actual ~$64k scale &mdash; and strategy ranking flips entirely between synthetic and real data, with the most conservative strategy going from worst to best.</li></ul>
+  </section>
+  <section>
+    <h2>Tech Stack</h2>
+    <div class="detail-stack"><span>Python</span><span>Gymnasium</span><span>Stable-Baselines3</span><span>SortedDict</span><span>FastAPI</span><span>SQLAlchemy</span><span>Bokeh</span><span>PostgreSQL</span></div>
+  </section>
+  <section>
+    <h2>Links &amp; Documents</h2>
+    <ul class="links-list"><li><a href="https://github.com/hkbuttar/bookmaker" target="_blank" rel="noopener">GitHub repository &rarr;</a></li><li><a href="https://bookmaker-frontend-oeed.onrender.com/frontend" target="_blank" rel="noopener">Live demo &rarr;</a></li></ul>
+  </section>
+</article>
+</main>
+<footer class="site-footer">
+  <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+  </svg>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-name">Harleen Kaur Buttar</p>
+      <p class="footer-tag">Data Scientist &amp; Visual Artist &mdash; Chicago, IL</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:hkbuttar@uchicago.edu">Email</a>
+      <a href="https://linkedin.com/in/hkbuttar" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hkbuttar" target="_blank" rel="noopener">GitHub</a>
+      <a href="../index.html#resume">R&eacute;sum&eacute;</a>
+    </div>
+  </div>
+  <p class="footer-note">&copy; 2026 Harleen Kaur Buttar. Built by hand, no frameworks.</p>
+</footer></body>
+</html>
