@@ -1,0 +1,34 @@
+slug: pairtrade-lab
+tag: PROJECT 18
+title: PairTrade Lab
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Statistical arbitrage backtester &mdash; cointegration testing, Kalman-filter dynamic hedge ratios, and structural-break monitoring on real US equities, walk-forward validated with block-bootstrap confidence intervals that report a genuine negative result.
+stack:
+- Python
+- statsmodels
+- PyKalman
+- yfinance
+- Panel
+- Bokeh
+- FastAPI
+overview: |-
+  Every other project in this portfolio trades directionally &mdash; cross-sectional factors, market-making, execution &mdash; betting on absolute price movement or liquidity provision. Statistical arbitrage is fundamentally different: it bets on the relationship between assets reverting to historical norms, market-neutral by construction. This project builds that discipline from scratch on ~70 large/mid-cap US equities across six sectors: Engle-Granger and Johansen cointegration testing with Benjamini-Hochberg FDR correction across every pair and basket tested (not just the survivors), Kalman-filtered dynamic hedge ratios, rolling structural-break monitoring, and an event-driven walk-forward backtest with block-bootstrap confidence intervals. The honest headline result is a genuine "no, it doesn't (yet) work" &mdash; reported as exactly that, not massaged into a better-looking number.
+approach:
+- |-
+  Ran Engle-Granger cointegration tests across every within-sector candidate pair (and Johansen tests for 3&ndash;5-leg baskets) with FDR correction applied across the full batch, not per-sector &mdash; surfacing exactly one statistically significant pair (BAC/PNC) out of 369 tested, and reporting every tested pair, not just the survivor.
+- |-
+  Compared static vs. Kalman-filtered hedge ratios at two levels and let the full-system result overturn the component-level one: Kalman tracked BAC/PNC's spread 65&ndash;84% more accurately in isolation, but in the full walk-forward backtest static hedge ratios produced a better CAGR and smaller drawdown from far fewer trades, since Kalman's tighter tracking traded more often and that extra frequency didn't pay for itself after costs and pair rotation.
+- |-
+  Built rolling structural-break monitoring (a continuously re-run Engle-Granger test plus a CUSUM control chart) and found the project's most important result at the selection stage: the one pair that survived full-sample FDR correction was HALTED for 86% of the 2018&ndash;2025 backtest window under continuous re-testing &mdash; full-sample cointegration significance is not the same claim as "the relationship holds throughout the sample."
+- |-
+  Backtested the full walk-forward strategy (2018&ndash;2025, point-in-time-correct refits, next-day fills, transaction costs) and reported a genuine negative result with statistical backing: CAGR -0.94%, Sharpe -0.69, with block-bootstrap 95% confidence intervals on both metrics that never cross zero &mdash; the strategy loses money on this universe and window, and the negative result is robust to resampling, not one unlucky trade sequence.
+- |-
+  Validated the ML-assisted candidate-discovery pipeline (PCA-residualized hierarchical clustering) against hand-picked sectors and reported the honest null result &mdash; after removing the shared market factor, the ML-discovered clusters were near-exact reproductions of the hand-picked sectors, and the one basket where the two approaches disagreed turned out to share the identical raw p-value, differing only by which side of an arbitrary multiple-comparisons threshold it landed on.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/pairtrade-lab
+- label: Live demo
+  href: https://pairtrade-lab.onrender.com/app
