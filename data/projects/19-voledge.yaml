@@ -1,0 +1,33 @@
+slug: voledge
+tag: PROJECT 19
+title: VolEdge
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Options pricing and volatility research platform &mdash; Black-Scholes/binomial/Monte Carlo pricing, Heston/SVI vol surface calibration from real SPY chains, and a backtested vol arbitrage signal with regime-aware confidence intervals.
+stack:
+- Python
+- NumPy
+- SciPy
+- yfinance
+- FastAPI
+- Dash
+overview: |-
+  Every other project in this portfolio trades the underlying, directionally or market-neutral; VolEdge is the first to touch derivatives &mdash; pricing them correctly, extracting what the market is actually saying about future volatility, and testing whether that information can be traded. Built on real SPY options chains: closed-form and tree/Monte Carlo pricing (with real American early-exercise premiums, since SPY options aren't European like SPX), implied volatility extraction validated against two independent solvers, SVI and Heston vol-surface calibration compared honestly against each other, Breeden-Litzenberger risk-neutral density extraction, and a vol arbitrage signal backtested via block-bootstrapped SPY return paths rather than a nonexistent historical options panel. Every numerical instability, edge case, and modeling gap encountered along the way is measured and disclosed rather than smoothed over.
+approach:
+- |-
+  Built pricing from first principles (own erf-based Black-Scholes, binomial/trinomial trees with real American early exercise, exact-transition-density Monte Carlo, Longstaff-Schwartz for path-dependent American exercise), then measured two real, non-obvious failure modes rather than citing generic disclaimers: tree-based gamma off by two orders of magnitude at a naive finite-difference bump size, and Monte Carlo delta biased by ~0.09 without common random numbers across evaluations, fixed to within 0.001 once applied.
+- |-
+  Extracted implied volatility from the real SPY chain with two solvers compared honestly (Brent converged on all 3,116 in-bounds contracts; Newton-Raphson failed on ~14%, concentrated exactly where vega is near zero), and diagnosed a real market-data problem before any smile-fitting could work at all: a stale ITM quote directly contradicting a more liquid OTM quote at the same strike, fixed by the standard OTM-only convention, which dropped fitting error from 10-20 vol points to 1-6.
+- |-
+  Calibrated SVI per expiry and Heston globally across the full 12-slice real surface, and let a real finding connect the two: two independently-fitted SVI slices exhibited genuine calendar arbitrage, and Heston's single arbitrage-free process correspondingly failed to converge on the full noisy surface (RMSE 0.103 vs. SVI's 0.052) while converging cleanly and competitively on the six longer-dated, better-behaved slices (0.050 vs. 0.042, with 6x fewer parameters).
+- |-
+  Extracted the real SPY risk-neutral density via Breeden-Litzenberger and quantified market-implied crash risk directly: -0.427 skewness against a lognormal baseline that is structurally incapable of being negative, plus excess kurtosis of 12.0 vs. 0.017 &mdash; and traced why this method is far more numerically stable than Dupire's local-vol formula on the identical surface (2% negative-density points vs. Dupire's 41% NaN rate) to Dupire needing an extra derivative that straddles each expiry's calendar-interpolation kink.
+- |-
+  Backtested a vol arbitrage signal via circular block-bootstrapped SPY return paths under real bid/ask costs, and reported the honest, load-bearing finding: within-regime Monte Carlo noise alone gives a tight 95% CI on mean P&amp;L ([1.336, 1.371]), but re-running across 43 real rolling 252-day windows gives a CI roughly 297x wider ([-1.38, 9.13]) &mdash; almost all of the strategy's real uncertainty comes from which slice of market history you'd have traded through, not from simulation sampling noise.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/voledge
+- label: Live demo
+  href: https://voledge-ywzs.onrender.com/
