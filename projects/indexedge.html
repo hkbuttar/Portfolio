@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IndexEdge · Harleen Kaur Buttar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script src="../doc-viewer.js" defer></script>
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <svg class="mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" />
+        <path d="M13 12v16M13 20h6.5M27 12v16" />
+      </svg>
+      <span>Harleen Kaur Buttar</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../education.html">Education</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../coursework.html">Coursework</a></li>
+      </ul>
+      <a class="resume-btn" href="../index.html#resume">View Résumé</a>
+    </nav>
+  </div>
+</header><main>
+<article class="detail">
+  <a class="back-link" href="../projects.html">&larr; All Projects</a>
+  <p class="detail-tag">PROJECT 21</p>
+  <h1>IndexEdge</h1>
+  <div class="detail-meta">
+    <span>Independent Project</span>
+    <span>2026</span>
+<span>Solo</span>  </div>
+<svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+</svg>  <section>
+    <h2>Overview</h2>
+    <p>Most index-replication and smart-beta writeups either work from today's constituent list applied retroactively (silent survivorship bias) or present a single backtest run as if its Sharpe ratio were a fact rather than one draw from an uncertain distribution. IndexEdge avoids both: S&amp;P 500 membership is reconstructed point-in-time from a real dated corporate-action log (validated against a real historical fact &mdash; Tesla wasn't in the index on 2020-01-01 and was by 2021-01-01), and every headline number carries a block-bootstrap confidence interval rather than a bare point estimate. The deeper goal is to test smart-beta's own textbook claims directly: does low-volatility investing actually protect returns when markets are stressed? Does an ML sampling method find a genuinely different reduced portfolio, or just a noisier version of the same one? Does any smart-beta edge survive real trading costs at institutional size? All three get a direct numeric answer, including where the honest answer is "no."</p>
+  </section>
+  <section>
+    <h2>Approach</h2>
+    <ul class="approach-list"><li>Built point-in-time constituent reconstruction by rolling today's S&amp;P 500 list backward through Wikipedia's real dated changes log, then found and fixed a real yfinance bug along the way: multi-class companies (GOOGL/GOOG, FOX/FOXA) return an identical combined share count for every class, roughly doubling that company's computed weight if used naively.</li><li>Implemented three genuinely different optimized-sampling methods (sector/cap-tercile stratification, convex tracking-error-variance minimization, and L1-regularized LASSO) and reported the honest divergence: LASSO starts markedly worse on tracking error at low name counts but converges by N&asymp;100, while its turnover runs nearly double optimization's at the same name count &mdash; a genuinely different, and at realistic scale costlier, portfolio, not just a noisier estimate of the same one.</li><li>Tested the low-volatility anomaly's own textbook claim directly via regime-conditional performance and found it inverts on real data: minimum-volatility's realized volatility genuinely is lowest across every regime, but its return relative to full replication is worst specifically in the volatile regime (-8.30% at $10M AUM, widening to -26.92% at $1B) &mdash; the opposite of the "low-vol holds up when markets are stressed" claim the strategy is supposed to validate.</li><li>Built a multi-objective portfolio optimizer (epsilon-constraint, not weighted-sum scalarization, since tracking-error-variance and turnover terms live on scales too different for an unnormalized sum) and validated it against the one property that must hold for any correct convex epsilon-constraint solve: relaxing the turnover budget can never increase the achieved tracking error.</li><li>Layered real square-root-law transaction costs (reused from ExecEdge's own calibration) across every rebalance and block-bootstrap confidence intervals across every headline number, then reported which smart-beta variants actually survive: quality-weighted beats cap-weighted replication after costs at every AUM level tested, while minimum-volatility's confidence interval spans zero at every level &mdash; not reliably distinguishable from full replication once its bootstrap uncertainty is accounted for.</li></ul>
+  </section>
+  <section>
+    <h2>Tech Stack</h2>
+    <div class="detail-stack"><span>Python</span><span>cvxpy</span><span>scikit-learn</span><span>statsmodels</span><span>yfinance</span><span>FastAPI</span><span>React</span></div>
+  </section>
+  <section>
+    <h2>Links &amp; Documents</h2>
+    <ul class="links-list"><li><a href="https://github.com/hkbuttar/indexedge" target="_blank" rel="noopener">GitHub repository &rarr;</a></li><li><a href="https://indexedge.vercel.app/" target="_blank" rel="noopener">Live demo &rarr;</a></li></ul>
+  </section>
+</article>
+</main>
+<footer class="site-footer">
+  <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+  </svg>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-name">Harleen Kaur Buttar</p>
+      <p class="footer-tag">Data Scientist &amp; Visual Artist &mdash; Chicago, IL</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:hkbuttar@uchicago.edu">Email</a>
+      <a href="https://linkedin.com/in/hkbuttar" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hkbuttar" target="_blank" rel="noopener">GitHub</a>
+      <a href="../index.html#resume">R&eacute;sum&eacute;</a>
+    </div>
+  </div>
+  <p class="footer-note">&copy; 2026 Harleen Kaur Buttar. Built by hand, no frameworks.</p>
+</footer></body>
+</html>

@@ -1,0 +1,34 @@
+slug: indexedge
+tag: PROJECT 21
+title: IndexEdge
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  S&amp;P 500 replication and smart-beta construction on point-in-time reconstructed constituent history, testing smart-beta's textbook claims against real data &mdash; and reporting exactly where the low-volatility anomaly doesn't hold up.
+stack:
+- Python
+- cvxpy
+- scikit-learn
+- statsmodels
+- yfinance
+- FastAPI
+- React
+overview: |-
+  Most index-replication and smart-beta writeups either work from today's constituent list applied retroactively (silent survivorship bias) or present a single backtest run as if its Sharpe ratio were a fact rather than one draw from an uncertain distribution. IndexEdge avoids both: S&amp;P 500 membership is reconstructed point-in-time from a real dated corporate-action log (validated against a real historical fact &mdash; Tesla wasn't in the index on 2020-01-01 and was by 2021-01-01), and every headline number carries a block-bootstrap confidence interval rather than a bare point estimate. The deeper goal is to test smart-beta's own textbook claims directly: does low-volatility investing actually protect returns when markets are stressed? Does an ML sampling method find a genuinely different reduced portfolio, or just a noisier version of the same one? Does any smart-beta edge survive real trading costs at institutional size? All three get a direct numeric answer, including where the honest answer is "no."
+approach:
+- |-
+  Built point-in-time constituent reconstruction by rolling today's S&amp;P 500 list backward through Wikipedia's real dated changes log, then found and fixed a real yfinance bug along the way: multi-class companies (GOOGL/GOOG, FOX/FOXA) return an identical combined share count for every class, roughly doubling that company's computed weight if used naively.
+- |-
+  Implemented three genuinely different optimized-sampling methods (sector/cap-tercile stratification, convex tracking-error-variance minimization, and L1-regularized LASSO) and reported the honest divergence: LASSO starts markedly worse on tracking error at low name counts but converges by N&asymp;100, while its turnover runs nearly double optimization's at the same name count &mdash; a genuinely different, and at realistic scale costlier, portfolio, not just a noisier estimate of the same one.
+- |-
+  Tested the low-volatility anomaly's own textbook claim directly via regime-conditional performance and found it inverts on real data: minimum-volatility's realized volatility genuinely is lowest across every regime, but its return relative to full replication is worst specifically in the volatile regime (-8.30% at $10M AUM, widening to -26.92% at $1B) &mdash; the opposite of the "low-vol holds up when markets are stressed" claim the strategy is supposed to validate.
+- |-
+  Built a multi-objective portfolio optimizer (epsilon-constraint, not weighted-sum scalarization, since tracking-error-variance and turnover terms live on scales too different for an unnormalized sum) and validated it against the one property that must hold for any correct convex epsilon-constraint solve: relaxing the turnover budget can never increase the achieved tracking error.
+- |-
+  Layered real square-root-law transaction costs (reused from ExecEdge's own calibration) across every rebalance and block-bootstrap confidence intervals across every headline number, then reported which smart-beta variants actually survive: quality-weighted beats cap-weighted replication after costs at every AUM level tested, while minimum-volatility's confidence interval spans zero at every level &mdash; not reliably distinguishable from full replication once its bootstrap uncertainty is accounted for.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/indexedge
+- label: Live demo
+  href: https://indexedge.vercel.app/
