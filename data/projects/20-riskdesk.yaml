@@ -1,0 +1,34 @@
+slug: riskdesk
+tag: PROJECT 20
+title: RiskDesk
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  The portfolio's capstone risk layer &mdash; aggregates real positions across six sibling trading projects and asks whether the combined book is actually as diversified as each strategy's own backtest implied. It isn't.
+stack:
+- Python
+- statsmodels
+- arch
+- cvxpy
+- scikit-learn
+- FastAPI
+- Observable Framework
+overview: |-
+  Every other project in this portfolio manages its own risk in isolation &mdash; each one's own backtest, own kill-switch, own Sharpe ratio. RiskDesk is the capstone layer that asks the question none of them can answer alone: aggregated together, is this six-strategy book actually diversified? It connects to Alpha Signal Lab, StreamAlpha, BookMaker, ExecEdge, PairTrade Lab, and VolEdge's own real data (live Postgres positions, real backtest stand-ins, a real current options chain &mdash; never fabricated), then builds a full institutional risk stack on top: five VaR/CVaR methods compared head-to-head, DCC-GARCH time-varying correlation, factor decomposition, regime-conditional models, historical and reverse stress testing, extreme value theory, counterparty credit risk, and live monitoring. The honest answer, arrived at through four independent methodologies that converge on the same root cause, is no &mdash; and the project explains exactly why.
+approach:
+- |-
+  Built six connectors that read each sibling project's own real, live, or backtested data with zero fabrication &mdash; live Postgres positions from Alpha Signal Lab, a real Binance-data backtest run from BookMaker, disclosed backtest/signal stand-ins from PairTrade Lab and VolEdge &mdash; and reported the first honest finding immediately: each strategy's gross exposure reflects a wildly different, unnormalized starting capital base, so raw net/gross totals aren't yet apples-to-apples across strategies.
+- |-
+  Implemented five VaR/CVaR methods (historical, parametric, Monte Carlo, Cornish-Fisher, EVT) on one shared hypothetical P&amp;L series and quantified exactly where and why they diverge: near-agreement at 95% confidence, a ~49% spread at 99%, because two methods assume normal returns against a real loss series with positive skew and excess kurtosis &mdash; a textbook weakness, now measured rather than asserted.
+- |-
+  Ran factor decomposition across the aggregated book and found the capstone's central result: a supposedly market-neutral pairs-trading strategy carries statistically significant hidden market and sector beta (SPY loading p=0.003) once combined with its real position sizing &mdash; the opposite of what "market-neutral" implies about its own risk, and the single largest driver of the whole portfolio's factor exposure.
+- |-
+  Built reverse stress testing (solving for the minimum-Mahalanobis-distance factor-move combination that produces a target loss, via a from-scratch DCC-GARCH-informed quadratic program) and surfaced the project's most consequential finding: the most plausible way to break this book is a rally, not a crash &mdash; a direct, mechanical consequence of the hidden beta found upstream, and a scenario no individual strategy's own risk process would ever have surfaced on its own.
+- |-
+  Synthesized four independently-built methodologies &mdash; factor decomposition, position aggregation, concentration limits, and P&amp;L attribution &mdash; that converged on the same root cause with no knowledge of each other's conclusions, while disclosing the caveat that travels with the finding: its magnitude is inflated by one strategy's thin, unrepresentative snapshot, not evidence the other five strategies are secretly correlated.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/riskdesk
+- label: Live demo
+  href: https://riskdesk-eight.vercel.app/

@@ -30,7 +30,7 @@ directly in `templates/education.html` rather than YAML-driven.
 ```
 .
 ├── data/
-│   ├── projects/            # one YAML file per project (19 currently)
+│   ├── projects/            # one YAML file per project (20 currently)
 │   ├── coursework/           # one YAML file per coursework entry (2 currently)
 │   └── experience/           # one YAML file per job (9 currently)
 │
@@ -89,7 +89,7 @@ python3 -m http.server    # or: make serve
 
 ```bash
 python3 scripts/new_entry.py project my-new-project
-# → creates data/projects/20-my-new-project.yaml with placeholder fields
+# → creates data/projects/21-my-new-project.yaml with placeholder fields
 ```
 
 (Swap `project` for `coursework` to scaffold a coursework entry the same
@@ -187,7 +187,7 @@ the YAML `href` itself should never include that prefix.
 - **Education** (`education.html`) — static page, two degrees, hand-written
 - **Experience** (`experience.html` + `experience/*.html`) — 9 roles, card
   grid → full detail page each, ordered most-recent-first by end date
-- **Projects** (`projects.html` + `projects/*.html`) — 19 entries
+- **Projects** (`projects.html` + `projects/*.html`) — 20 entries
 - **Coursework** (`coursework.html` + `coursework/*.html`) — 2 entries
 
 Nav order: Home / Experience / Education / Projects / Coursework.
@@ -196,7 +196,7 @@ Nav order: Home / Experience / Education / Projects / Coursework.
 
 - ✅ Résumé (`assets/HARLEEN-BUTTAR.pdf`), embedded and working
 - ✅ Profile photo in the hero section
-- ✅ 18 of 19 projects have real GitHub repo links; 8 projects + 1
+- ✅ 19 of 20 projects have real GitHub repo links; 8 projects + 1
   experience entry have real PDF/PPTX document previews attached
 - ✅ The portfolio site's own repo/live-site links are populated (see
   `data/projects/portfolio-website.yaml`)
