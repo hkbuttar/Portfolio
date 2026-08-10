@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PolicyLens · Harleen Kaur Buttar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script src="../doc-viewer.js" defer></script>
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <svg class="mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" />
+        <path d="M13 12v16M13 20h6.5M27 12v16" />
+      </svg>
+      <span>Harleen Kaur Buttar</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../education.html">Education</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../coursework.html">Coursework</a></li>
+      </ul>
+      <a class="resume-btn" href="../index.html#resume">View Résumé</a>
+    </nav>
+  </div>
+</header><main>
+<article class="detail">
+  <a class="back-link" href="../projects.html">&larr; All Projects</a>
+  <p class="detail-tag">PROJECT 23</p>
+  <h1>PolicyLens</h1>
+  <div class="detail-meta">
+    <span>Independent Project</span>
+    <span>2026</span>
+<span>Solo</span>  </div>
+<svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+</svg>  <section>
+    <h2>Overview</h2>
+    <p>PolicyLens asks a harder question than prediction: did a minimum-wage policy cause the outcomes that followed it? Using real BLS and Census data for seven treated states and eight never-treated controls from 2014 through 2019, it compares naive two-way fixed effects with Callaway&ndash;Sant'Anna staggered difference-in-differences, classical and LASSO synthetic controls, and Bayesian structural time series. Four independent inference channels test whether the conclusions survive changes in estimator and uncertainty framework. The headline result is that naive TWFE overstates positive employment effects by roughly 2&ndash;8&times;; after correcting for staggered adoption, wage growth remains while the apparent employment gain largely disappears, and no method detects a statistically reliable employment decline.</p>
+  </section>
+  <section>
+    <h2>Approach</h2>
+    <ul class="approach-list"><li>Built a reproducible state-quarter panel from BLS QCEW employment and wage data, historical state minimum wages, and Census business-dynamics outcomes, covering seven staggered adopters and eight never-treated controls across food services, retail trade, and total private employment before the COVID-19 shock.</li><li>Compared naive two-way fixed effects directly with Callaway&ndash;Sant'Anna group-time treatment effects and quantified the bias: food-services employment moves from +0.7% to -0.1%, retail from +2.5% to +0.4%, and total private from +2.5% to +1.3%, while wage estimates remain broadly stable.</li><li>Implemented classical convex synthetic control, LASSO donor selection, and PyMC Bayesian structural time series for state-level counterfactuals, retaining explicit reliability flags when short pre-treatment histories caused unstable donor sensitivity or poor posterior convergence instead of treating those estimates as evidence.</li><li>Triangulated significance through event-study diagnostics, placebos in space and time, 1,000 treatment-timing permutations, and Bayesian posterior probabilities; all four channels strongly support wage growth while employment effects remain indistinguishable from zero, apart from a disclosed disagreement in retail-wage inference.</li><li>Extended the analysis to establishment entry and exit, industry and regional heterogeneity, alternative control groups, and leave-one-donor-out sensitivity, then exposed every estimator and diagnostic through typed FastAPI endpoints and an interactive Next.js dashboard backed by committed, reproducible results.</li></ul>
+  </section>
+  <section>
+    <h2>Tech Stack</h2>
+    <div class="detail-stack"><span>Python</span><span>PyMC</span><span>statsmodels</span><span>scikit-learn</span><span>FastAPI</span><span>Next.js</span></div>
+  </section>
+  <section>
+    <h2>Links &amp; Documents</h2>
+    <ul class="links-list"><li><a href="https://github.com/hkbuttar/policylens" target="_blank" rel="noopener">GitHub repository &rarr;</a></li><li><a href="https://policylens-five.vercel.app/" target="_blank" rel="noopener">Live demo &rarr;</a></li></ul>
+  </section>
+</article>
+</main>
+<footer class="site-footer">
+  <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+  </svg>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-name">Harleen Kaur Buttar</p>
+      <p class="footer-tag">Data Scientist &amp; Visual Artist &mdash; Chicago, IL</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:hkbuttar@uchicago.edu">Email</a>
+      <a href="https://linkedin.com/in/hkbuttar" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hkbuttar" target="_blank" rel="noopener">GitHub</a>
+      <a href="../index.html#resume">R&eacute;sum&eacute;</a>
+    </div>
+  </div>
+  <p class="footer-note">&copy; 2026 Harleen Kaur Buttar. Built by hand, no frameworks.</p>
+</footer></body>
+</html>

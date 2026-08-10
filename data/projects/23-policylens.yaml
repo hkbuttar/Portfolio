@@ -1,0 +1,33 @@
+slug: policylens
+tag: PROJECT 23
+title: PolicyLens
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Causal evaluation of staggered state minimum-wage increases using modern difference-in-differences, synthetic controls, and Bayesian structural time series &mdash; showing how naive estimates can materially overstate employment effects.
+stack:
+- Python
+- PyMC
+- statsmodels
+- scikit-learn
+- FastAPI
+- Next.js
+overview: |-
+  PolicyLens asks a harder question than prediction: did a minimum-wage policy cause the outcomes that followed it? Using real BLS and Census data for seven treated states and eight never-treated controls from 2014 through 2019, it compares naive two-way fixed effects with Callaway&ndash;Sant'Anna staggered difference-in-differences, classical and LASSO synthetic controls, and Bayesian structural time series. Four independent inference channels test whether the conclusions survive changes in estimator and uncertainty framework. The headline result is that naive TWFE overstates positive employment effects by roughly 2&ndash;8&times;; after correcting for staggered adoption, wage growth remains while the apparent employment gain largely disappears, and no method detects a statistically reliable employment decline.
+approach:
+- |-
+  Built a reproducible state-quarter panel from BLS QCEW employment and wage data, historical state minimum wages, and Census business-dynamics outcomes, covering seven staggered adopters and eight never-treated controls across food services, retail trade, and total private employment before the COVID-19 shock.
+- |-
+  Compared naive two-way fixed effects directly with Callaway&ndash;Sant'Anna group-time treatment effects and quantified the bias: food-services employment moves from +0.7% to -0.1%, retail from +2.5% to +0.4%, and total private from +2.5% to +1.3%, while wage estimates remain broadly stable.
+- |-
+  Implemented classical convex synthetic control, LASSO donor selection, and PyMC Bayesian structural time series for state-level counterfactuals, retaining explicit reliability flags when short pre-treatment histories caused unstable donor sensitivity or poor posterior convergence instead of treating those estimates as evidence.
+- |-
+  Triangulated significance through event-study diagnostics, placebos in space and time, 1,000 treatment-timing permutations, and Bayesian posterior probabilities; all four channels strongly support wage growth while employment effects remain indistinguishable from zero, apart from a disclosed disagreement in retail-wage inference.
+- |-
+  Extended the analysis to establishment entry and exit, industry and regional heterogeneity, alternative control groups, and leave-one-donor-out sensitivity, then exposed every estimator and diagnostic through typed FastAPI endpoints and an interactive Next.js dashboard backed by committed, reproducible results.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/policylens
+- label: Live demo
+  href: https://policylens-five.vercel.app/
