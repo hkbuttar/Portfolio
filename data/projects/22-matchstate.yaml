@@ -1,0 +1,33 @@
+slug: matchstate
+tag: PROJECT 22
+title: MatchState
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  A live win-probability model for English Premier League matches, combining Dixon-Coles and hierarchical Bayesian baselines with possession-value momentum and gradient boosting &mdash; then benchmarking every model against real betting-market odds.
+stack:
+- Python
+- PyMC
+- XGBoost
+- FastAPI
+- Next.js
+- StatsBomb
+overview: |-
+  Soccer win probability is unusually difficult: there are three outcomes, scoring is sparse, and a single event can transform the match state. MatchState builds a calibrated minute-by-minute prediction stack from real EPL data, progressing from a transparent Dixon-Coles Poisson baseline through hierarchical Bayesian team-strength estimates, an Expected Threat momentum signal, and a gradient boosting model. Every layer is evaluated with walk-forward validation and match-block bootstrap confidence intervals, then compared directly with de-vigged Pinnacle odds. The result is deliberately honest: gradient boosting adds clear value early in matches but does not win overall, no model beats the betting market at the confidence the available data supports, and the most important finding is how sharply a single season of open event data limits what sophisticated models can prove.
+approach:
+- |-
+  Built a Dixon-Coles Poisson baseline on 33 EPL seasons and extended it into a transparent in-game model by scaling scoring rates for the remaining time and conditioning on the current score, creating a strong statistical benchmark before introducing higher-complexity methods.
+- |-
+  Implemented a hierarchical Bayesian team-strength model in PyMC with partial pooling and within-season random walks, validating it with posterior predictive checks and formal convergence diagnostics; its average improvement over static fitting was directional but did not reach significance on the smaller bootstrapped single-season sample.
+- |-
+  Fit an Expected Threat grid by value iteration on 655K StatsBomb actions, crediting completed passes and carries for increases in positional danger, and combined rolling xT momentum with score, xG, red cards, and player-weighted substitutions in a transferable XGBoost model that deliberately excludes team identity.
+- |-
+  Benchmarked the models against de-vigged Pinnacle odds and found that the market remains stronger overall, while the in-game gap narrows enough to become statistically indistinguishable from noise; gradient boosting wins clearly only in the first 30 minutes, when momentum and card state contain information the Poisson models cannot represent.
+- |-
+  Used match-block bootstrap confidence intervals to preserve dependence among minute-by-minute observations and exposed the project's central data constraint: event-level EPL coverage supports only a 95-match held-out set, while the 8,808-match goals-only history produces much firmer conclusions about the simpler models.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/matchstate
+- label: Live demo
+  href: https://matchstate.vercel.app/
