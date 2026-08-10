@@ -1,0 +1,33 @@
+slug: sonicmap
+tag: PROJECT 24
+title: SonicMap
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  Audio-native genre and mood modeling with similarity search and playlist generation, comparing CNN and gradient-boosted classifiers with classification-derived and contrastive embeddings on real music datasets.
+stack:
+- Python
+- PyTorch
+- XGBoost
+- librosa
+- FastAPI
+- React
+overview: |-
+  SonicMap builds an end-to-end music-understanding stack from raw audio: genre classification, continuous valence-arousal mood regression, learned similarity search, cross-dataset generalization, and gradually drifting playlist generation. CNN and gradient-boosted models are evaluated alongside two distinct 128-dimensional audio embeddings &mdash; one taken from the strongest genre classifier and one trained explicitly with triplet loss &mdash; using cross-validation, query-level bootstrap intervals, leakage audits, and an out-of-distribution GTZAN-to-FMA test. The most useful result is negative: the purpose-built triplet embedding does not beat the classification-derived representation in-distribution, though it suffers a smaller chance-adjusted retrieval drop on FMA.
+approach:
+- |-
+  Trained mel-spectrogram CNNs and gradient-boosted engineered-feature models on real GTZAN audio, reaching 75.9% genre accuracy with the augmented CNN under five-fold cross-validation while enforcing source-track grouping so transformed clips could not leak across folds.
+- |-
+  Modeled DEAM's continuous valence and arousal annotations with separate CNN and gradient-boosted regressors, reporting MAE, RMSE, R&sup2;, and fold-level confidence intervals for each affective dimension rather than collapsing mood into coarse categorical labels.
+- |-
+  Compared a 128-dimensional classification-derived embedding against a separately trained triplet-loss network using exact nearest-neighbor retrieval, bootstrap precision-at-k, silhouette scores, engineered-feature baselines, and an explicitly labeled genre-metadata upper bound; classification features won P@10 by 0.890 to 0.677.
+- |-
+  Evaluated both the classifier and similarity spaces without retraining on 2,999 exact-taxonomy-overlap FMA tracks, where genre accuracy fell to 34.6%; chance-adjusted retrieval showed the triplet representation degraded less, revealing a robustness advantage hidden by the stronger in-distribution classification embedding.
+- |-
+  Built embedding-space playlist traversal and measured coherence against matched random playlists across 100 stratified seeds, then served committed experiment artifacts through a read-only FastAPI backend and an interactive React/TypeScript dashboard with UMAP, retrieval, generalization, and playlist views.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/sonicmap
+- label: Live demo
+  href: https://sonicmap-sigma.vercel.app/
