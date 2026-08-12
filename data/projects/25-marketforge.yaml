@@ -1,0 +1,33 @@
+slug: marketforge
+tag: PROJECT 25
+title: MarketForge
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  A local-first analytical data platform with incremental ingestion, immutable Parquet, DuckDB/dbt analytics, Dagster orchestration, data contracts, lineage, observability, and tested failure recovery on CPU-only hardware.
+stack:
+- Python
+- DuckDB
+- dbt
+- Dagster
+- FastAPI
+- React
+overview: |-
+  MarketForge is a systems project, not a stock-prediction application. It tests how faithfully production analytical-engineering behavior can be reproduced on one CPU-only laptop without adding distributed infrastructure that the measured workload does not need. Real Tiingo prices for 100 symbols and bounded SEC, earnings, macroeconomic, news, and StreamAlpha inputs cross explicit contract and quarantine boundaries before immutable ZSTD Parquet storage. DuckDB queries the lake, dbt builds tested analytical marts, Dagster models asset dependencies, and a FastAPI/React control plane exposes health, lineage, quality, storage, and benchmarks. Reliability claims are backed by injected failures and recovery evidence, including replay-safe idempotency rather than an unearned exactly-once claim.
+approach:
+- |-
+  Built checkpointed incremental ingestion with atomic staged writes, overlap-safe late-data handling, strict schema contracts, row quarantine, reconciliation invariants, and immutable monthly Parquet fragments; checkpoints advance only after durable files and manifests succeed.
+- |-
+  Benchmarked a canonically equivalent full rebuild against the daily path on 140,700 Tiingo rows: incremental processing handled 100 rows in 0.438 seconds versus 70.540 seconds, running 160.99&times; faster and writing 99.78% fewer bytes.
+- |-
+  Evaluated CSV and three Parquet encodings plus three partition layouts, selecting ZSTD for an 82.04% storage reduction and year/month partitioning as the operational compromise; rejected year/month/symbol after 3,332 small files drove representative queries from milliseconds into roughly 0.8 seconds.
+- |-
+  Injected provider outages, malformed schemas, disk exhaustion, process termination around write boundaries, dbt failures, duplicate delivery, late data, and compaction-promotion failures, verifying that prior canonical data remains intact and retries converge without silently rewriting history.
+- |-
+  Integrated DuckDB, dbt, Dagster, SQLite operational metadata, bounded FastAPI reads, and a React control plane for catalog, run history, freshness, quarantine, lineage, resource budgets, and governed analytics; validated the platform with 128 deterministic tests across 19 required categories.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/marketforge
+- label: Live demo
+  href: https://marketforge-flame.vercel.app/
