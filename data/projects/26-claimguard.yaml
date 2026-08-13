@@ -1,0 +1,33 @@
+slug: claimguard
+tag: PROJECT 26
+title: ClaimGuard
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  An actuarial risk platform comparing transparent frequency-severity models with nonlinear machine learning for auto-insurance pricing, calibration, risk ranking, and extreme-loss stress testing.
+stack:
+- Python
+- XGBoost
+- statsmodels
+- scikit-learn
+- FastAPI
+- React
+overview: |-
+  ClaimGuard is an end-to-end actuarial risk platform built on 678,013 French motor third-party liability policies. It separates claim frequency from conditional severity, combines them into expected pure premium, evaluates direct Tweedie alternatives, and models the extreme tail independently. Traditional GLMs and nonlinear machine-learning models are compared on held-out accuracy, portfolio calibration, risk ranking, and large-loss behavior rather than reduced to a single winner. The conclusion is deliberately hybrid: ML improves several average-error and discrimination metrics, the Tweedie GLM is far better calibrated at the portfolio level, and none of the available policy-level models predicts the most extreme claims reliably.
+approach:
+- |-
+  Reconciled the public freMTPL2 frequency and severity sources into policy-, claim-, and aggregate-loss tables with row-level audit flags, preserving 9,117 recorded-versus-linked claim-count mismatches and testing how alternative cleaning rules materially change loss cost and tail concentration.
+- |-
+  Benchmarked exposure-offset Poisson and Negative Binomial GLMs against nonlinear frequency models, where HistGradientBoosting reduced held-out Poisson deviance by 5.09%; separately compared Gamma and bias-corrected lognormal severity models with ML, where XGBoost lowered MAE by 17.24% but underpredicted aggregate severity by 20.9%.
+- |-
+  Compared component frequency-times-severity premiums with direct Tweedie GLM and boosting models: nonlinear components improved Tweedie deviance, direct boosting raised normalized Gini from 0.1889 to 0.2294, but the Tweedie GLM predicted 99.33% of observed aggregate loss versus 116.13% and 68.60% for the ML alternatives.
+- |-
+  Tested large-loss classification and model performance in the extreme tail, finding near-baseline precision-recall at the highest thresholds and less than 2.9% of held-out top-1% loss captured by every severity model &mdash; evidence that ordinary policy variables cannot reliably identify catastrophic claims in advance.
+- |-
+  Fit Peaks Over Threshold Extreme Value Theory scenarios and ran 10,000 aggregate-loss simulations, showing EVT-tail claims contributed 97.39% of 99% Expected Shortfall while explicitly treating the highly unstable heavy-tail estimates as stress evidence rather than booked capital forecasts; served the unified scoring engine through FastAPI and an interactive React dashboard.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/claimguard
+- label: Live demo
+  href: https://claimguard-eight.vercel.app/
