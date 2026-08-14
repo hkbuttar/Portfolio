@@ -1,0 +1,33 @@
+slug: homevalue
+tag: PROJECT 27
+title: HomeValue
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  An explainable Chicago housing-valuation system combining hedonic and spatial econometric models, comparable sales, machine learning, accessibility analysis, and calibrated uncertainty on recorded Cook County sales.
+stack:
+- Python
+- GeoPandas
+- PySAL
+- XGBoost
+- FastAPI
+- Next.js
+overview: |-
+  HomeValue investigates what determines a home's recorded sale price: its structure, neighborhood, accessibility, nearby transactions, or broader market conditions. It combines Cook County sales and historical property records with Census, CTA, shoreline, park, and other spatial context, then compares classical hedonic models, spatial econometrics, comparable-sales methods, and nonlinear machine learning. Prediction and explanation are kept distinct: spatially clustered residuals diagnose omitted geographic structure, property-versus-place decomposition reconciles individual estimates, and validation includes future-period and geographic holdouts plus split-conformal uncertainty. Findings are explicitly labeled robust, suggestive, exploratory, or data-limited, and the outputs are research estimates rather than appraisals.
+approach:
+- |-
+  Built a provenance-tracked analytical panel from Cook County parcel sales, historical property characteristics, parcel geography, Census ACS estimates, CTA GTFS, and amenity layers, using contemporaneous-or-earlier property snapshots and prior-only local-market features to prevent future-information leakage.
+- |-
+  Fit an interpretable log-price hedonic model and nested property, market-timing, and neighborhood specifications on common samples, measuring the incremental information contributed by place and reconciling each individual valuation into property and location components.
+- |-
+  Diagnosed geographic dependence with Moran's I, permutation inference, alternative spatial weights, and mapped residuals, then compared common-sample OLS with spatial autoregressive, spatial error, and conditionally supported Spatial Durbin specifications without treating spatial association as causal evidence.
+- |-
+  Implemented a leakage-safe comparable-sales engine using only transactions recorded before each target sale, weighting candidates by distance, recency, and property similarity; radius experiments quantify how quickly local valuation information deteriorates with geographic separation.
+- |-
+  Benchmarked median, price-per-square-foot, comps, hedonic, spatial, Random Forest, histogram-gradient-boosting, and XGBoost approaches under ordered future-period and geographic holdouts, audited error by property and neighborhood segment, and added split-conformal intervals with subgroup coverage checks; served the resulting research system through FastAPI and a map-driven Next.js application.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/HomeValue
+- label: Live demo
+  href: https://home-value-beta.vercel.app/
