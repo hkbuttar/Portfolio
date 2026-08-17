@@ -1,0 +1,33 @@
+slug: marketlab
+tag: PROJECT 28
+title: MarketLab
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  A full-stack quantitative research platform for point-in-time factor analysis, realistic portfolio backtesting, transaction costs, capacity, attribution, regimes, walk-forward ML, and reproducible strategy validation.
+stack:
+- Python
+- scikit-learn
+- SHAP
+- FastAPI
+- PostgreSQL
+- Next.js
+overview: |-
+  MarketLab is reusable research infrastructure for taking a daily U.S. equity hypothesis from raw data through point-in-time feature engineering, portfolio construction, realistic execution simulation, out-of-sample validation, and a reproducible report. It supports technical and fundamental factors, cost and capacity modeling, factor attribution, regime analysis, robustness scoring, bootstrap inference, and purged walk-forward machine learning behind a FastAPI and Next.js product layer. Its most important result is negative: under an identical 2018&ndash;2026 out-of-sample comparison, Gradient Boosting, Random Forest, and Elastic Net all lagged both SPY and the simple quality-value-momentum baseline, showing that extra model complexity did not add deployable value.
+approach:
+- |-
+  Built a point-in-time data and feature pipeline for prices, SEC fundamentals, market capitalization, security crosswalks, and benchmark factors, with canonical schemas, processed-data validation, prior-available feature construction, and resumable stage manifests for reproducible experiments.
+- |-
+  Implemented a portfolio backtester with explicit clocks, orders, execution, accounting, constraints, weighting, turnover, risk targeting, and transaction-cost models, then layered capacity analysis and cost sensitivity so gross strategy results could not masquerade as investable performance.
+- |-
+  Evaluated momentum, low-volatility, and quality-value-momentum strategies across long histories with factor attribution, regime behavior, bootstrap analysis, parameter sensitivity, deflated Sharpe ratios, and a transparent robustness score; the strongest tested multi-factor strategy earned only a moderate 69.9/100 robustness rating.
+- |-
+  Ran purged walk-forward comparisons of Elastic Net, Random Forest, and Gradient Boosting against identical portfolio-selection and cost assumptions; every ML strategy underperformed the simple multi-factor baseline and SPY out of sample, an explicit negative finding retained rather than optimized away after seeing the test period.
+- |-
+  Added an experiment registry, resumable research workflow, reproducible Markdown/HTML flagship studies, PostgreSQL metadata, bounded FastAPI services, and a Next.js dashboard spanning strategy construction, factor research, backtests, capacity, ML comparisons, and report generation while clearly excluding live execution and broker integration.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/MarketLab
+- label: Live demo
+  href: https://market-lab-mauve.vercel.app/
