@@ -25,7 +25,7 @@ approach:
 - |-
   Found and fixed a site-wide bug where every generated document link 404'd on every project, coursework, and experience detail page except the homepage r&eacute;sum&eacute; &mdash; the shared <code>doc_card</code> Jinja macro was missing the <code>../</code> path prefix that every other page-relative link in the templates already used. Fixed it by threading a <code>depth</code> parameter through the macro, then wrote a small audit script to verify every rendered document link across the whole generated site resolves against a real file on disk, rather than trusting a visual spot-check.
 - |-
-  Grew the projects section to 28 entries via <code>scripts/new_entry.py</code>, including one with three links (a GitHub repo plus two separately deployed live dashboards) &mdash; confirming the schema's open-ended <code>links:</code> list needed no changes to support more than the usual repo-plus-one-extra pattern.
+  Grew the projects section to 29 entries via <code>scripts/new_entry.py</code>, including one with three links (a GitHub repo plus two separately deployed live dashboards) &mdash; confirming the schema's open-ended <code>links:</code> list needed no changes to support more than the usual repo-plus-one-extra pattern.
 links:
 - label: GitHub repository
   href: 'https://github.com/hkbuttar/Portfolio'

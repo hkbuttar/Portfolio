@@ -1,0 +1,31 @@
+slug: reconengine
+tag: PROJECT 29
+title: ReconEngine
+org: Independent Project
+dates: '2026'
+team: Solo
+short: |-
+  A post-trade reconciliation platform spanning capture through settlement, with tolerance-based matching, break aging, invoice reconciliation, immutable audit trails, lineage, SQL Server, Qlik Sense, and assistive AI.
+stack:
+- Python
+- SQL Server
+- XGBoost
+- FastAPI
+- Qlik Sense
+- Claude API
+overview: |-
+  ReconEngine asks whether a completed trade agrees across front-office capture, clearing, confirmation, settlement, accounting, and invoicing &mdash; and, when it does not, why. It combines roughly 11,000 real public trades from Binance, Coinbase, and Kraken with real venue fee schedules and explicitly synthetic clearing, confirmation, invoice, and resolution discrepancies, because firms do not publish their internal breaks. The system implements the full lifecycle as a gated state machine, reconciliation and root-cause classification, multi-day aging and escalation, SQL Server-native immutable audit logging, lineage, monitoring, LLM-assisted explanations and safe natural-language queries, and a specified Qlik Sense BI layer. Its transferable result is the tested operational architecture; its injected break rates are not claims about real desks.
+approach:
+- |-
+  Built idempotent multi-source ETL into SQL Server with schema, type, duplicate, and referential checks, then modeled capture through accounting as a gated five-stage state machine so trades cannot advance optimistically when a confirmation or settlement condition is missing.
+- |-
+  Implemented tolerance-based reconciliation for every trade-stage pair and scored it against disclosed injected ground truth, reaching 100% after the evaluation exposed a real numeric precision-floor bug; separately documented that loose fuzzy matching creates spurious pairs in dense trade tapes rather than claiming the heuristic is production-ready.
+- |-
+  Grounded an eight-category break taxonomy in FIX Protocol, SEC T+1, SWIFT MT548, and Reg SHO concepts, then compared transparent rules with XGBoost: 99.90% versus 99.88% accuracy, with both failing on the same eight signal-free rows &mdash; evidence that ML adds no useful complexity when labels are deterministic by construction.
+- |-
+  Reconciled expected fees from real published schedules against disclosed synthetic invoices and caught 100% of genuine injected discrepancies after fixing an absolute-only materiality rule that missed 509 small-notional errors; added rolling break aging, escalation, SLA monitoring, and explicit unresolved-break carry-forward.
+- |-
+  Verified a SQL Server 2022 append-only ledger audit trail, complete acyclic lineage, bounded read-only LLM-to-SQL safeguards, and load behavior at replicated volume; the matching engine sustained 452,610 trades per second while SQL loading was the measured bottleneck, and 70 tests cover lifecycle, matching, taxonomy, invoices, immutability, lineage, constraints, and performance regression.
+links:
+- label: GitHub repository
+  href: https://github.com/hkbuttar/ReconEngine

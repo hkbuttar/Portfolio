@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReconEngine · Harleen Kaur Buttar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script src="../doc-viewer.js" defer></script>
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <svg class="mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" />
+        <path d="M13 12v16M13 20h6.5M27 12v16" />
+      </svg>
+      <span>Harleen Kaur Buttar</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../education.html">Education</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../coursework.html">Coursework</a></li>
+      </ul>
+      <a class="resume-btn" href="../index.html#resume">View Résumé</a>
+    </nav>
+  </div>
+</header><main>
+<article class="detail">
+  <a class="back-link" href="../projects.html">&larr; All Projects</a>
+  <p class="detail-tag">PROJECT 29</p>
+  <h1>ReconEngine</h1>
+  <div class="detail-meta">
+    <span>Independent Project</span>
+    <span>2026</span>
+<span>Solo</span>  </div>
+<svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+</svg>  <section>
+    <h2>Overview</h2>
+    <p>ReconEngine asks whether a completed trade agrees across front-office capture, clearing, confirmation, settlement, accounting, and invoicing &mdash; and, when it does not, why. It combines roughly 11,000 real public trades from Binance, Coinbase, and Kraken with real venue fee schedules and explicitly synthetic clearing, confirmation, invoice, and resolution discrepancies, because firms do not publish their internal breaks. The system implements the full lifecycle as a gated state machine, reconciliation and root-cause classification, multi-day aging and escalation, SQL Server-native immutable audit logging, lineage, monitoring, LLM-assisted explanations and safe natural-language queries, and a specified Qlik Sense BI layer. Its transferable result is the tested operational architecture; its injected break rates are not claims about real desks.</p>
+  </section>
+  <section>
+    <h2>Approach</h2>
+    <ul class="approach-list"><li>Built idempotent multi-source ETL into SQL Server with schema, type, duplicate, and referential checks, then modeled capture through accounting as a gated five-stage state machine so trades cannot advance optimistically when a confirmation or settlement condition is missing.</li><li>Implemented tolerance-based reconciliation for every trade-stage pair and scored it against disclosed injected ground truth, reaching 100% after the evaluation exposed a real numeric precision-floor bug; separately documented that loose fuzzy matching creates spurious pairs in dense trade tapes rather than claiming the heuristic is production-ready.</li><li>Grounded an eight-category break taxonomy in FIX Protocol, SEC T+1, SWIFT MT548, and Reg SHO concepts, then compared transparent rules with XGBoost: 99.90% versus 99.88% accuracy, with both failing on the same eight signal-free rows &mdash; evidence that ML adds no useful complexity when labels are deterministic by construction.</li><li>Reconciled expected fees from real published schedules against disclosed synthetic invoices and caught 100% of genuine injected discrepancies after fixing an absolute-only materiality rule that missed 509 small-notional errors; added rolling break aging, escalation, SLA monitoring, and explicit unresolved-break carry-forward.</li><li>Verified a SQL Server 2022 append-only ledger audit trail, complete acyclic lineage, bounded read-only LLM-to-SQL safeguards, and load behavior at replicated volume; the matching engine sustained 452,610 trades per second while SQL loading was the measured bottleneck, and 70 tests cover lifecycle, matching, taxonomy, invoices, immutability, lineage, constraints, and performance regression.</li></ul>
+  </section>
+  <section>
+    <h2>Tech Stack</h2>
+    <div class="detail-stack"><span>Python</span><span>SQL Server</span><span>XGBoost</span><span>FastAPI</span><span>Qlik Sense</span><span>Claude API</span></div>
+  </section>
+  <section>
+    <h2>Links &amp; Documents</h2>
+    <ul class="links-list"><li><a href="https://github.com/hkbuttar/ReconEngine" target="_blank" rel="noopener">GitHub repository &rarr;</a></li></ul>
+  </section>
+</article>
+</main>
+<footer class="site-footer">
+  <svg class="brush" viewBox="0 0 220 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 12.5c22-9 44-9 66-3 24 7 46 7 70-1 22-7 44-6 64 2 6 2.4 8 3 10 2.6" />
+  </svg>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-name">Harleen Kaur Buttar</p>
+      <p class="footer-tag">Data Scientist &amp; Visual Artist &mdash; Chicago, IL</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:hkbuttar@uchicago.edu">Email</a>
+      <a href="https://linkedin.com/in/hkbuttar" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hkbuttar" target="_blank" rel="noopener">GitHub</a>
+      <a href="../index.html#resume">R&eacute;sum&eacute;</a>
+    </div>
+  </div>
+  <p class="footer-note">&copy; 2026 Harleen Kaur Buttar. Built by hand, no frameworks.</p>
+</footer></body>
+</html>
