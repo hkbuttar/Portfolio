@@ -196,7 +196,7 @@ Nav order: Home / Experience / Education / Projects / Coursework.
 
 - ✅ Résumé (`assets/HARLEEN-BUTTAR.pdf`), embedded and working
 - ✅ Profile photo in the hero section
-- ✅ 27 of 28 projects have real GitHub repo links; 8 projects + 1
+- ✅ 27 of 28 projects have real GitHub repo links; 9 projects + 1
   experience entry have real PDF/PPTX document previews attached
 - ✅ The portfolio site's own repo/live-site links are populated (see
   `data/projects/portfolio-website.yaml`)
